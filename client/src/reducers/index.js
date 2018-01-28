@@ -3,8 +3,8 @@ import challenges from './challengesReducer';
 import currentUser from './currentUserReducer';
 
 const rootReducer = combineReducers({
-  currentUser,
-  challenges
+	currentUser,
+	challenges
 });
 
 export default rootReducer;

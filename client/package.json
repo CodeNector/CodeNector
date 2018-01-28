@@ -5,6 +5,8 @@
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "bootstrap": "^4.0.0",
+    "bootstrapp": "^0.0.0",
     "eslint": "^4.16.0",
     "install": "^0.10.4",
     "react": "^16.0.0",
@@ -14,7 +16,8 @@
     "react-scripts": "1.0.14",
     "react-transition-group": "^2.2.1",
     "reactstrap": "^5.0.0-alpha.4",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-promise": "^0.5.3"
   },
   "scripts": {
     "start": "react-scripts start",
