@@ -5,7 +5,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import HomePage from './components/pages/HomePage';
-// import Room "./components/Room"
+// import Room "./components/Room";
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 const store = configureStore();
 

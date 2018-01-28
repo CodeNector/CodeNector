@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup } from 'reactstrap';
+import { Form, FormGroup, Input, Button } from 'reactstrap';
 
 class ChooseUserName extends Component {
   state = {
@@ -24,8 +24,27 @@ class ChooseUserName extends Component {
 
   editForm() {
     return (
-      <Form>
+      <Form inline>
         <FormGroup>
+          <Input className="form-control"type="text" defaultValue={this.props.userName} onChange={this.updateState.bind(this)} />
+          {" "}
+          <Button type='submit' onClick={this.triggerChooseUserName.bind(this)}>
+            change username
+          </Button>
+        </FormGroup>
+      </Form>
+    );
+  }
+
+  editButton() {
+    return (
+      <Form inline>
+        <FormGroup>
+          <Input className="form-control"type="text" defaultValue={this.props.userName} disabled />
+          {" "}
+          <Button type='submit' onClick={this.toggleEditing.bind(this)}>
+            change username
+          </Button>
         </FormGroup>
       </Form>
     );
@@ -33,7 +52,9 @@ class ChooseUserName extends Component {
 
   render() {
     return (
-      <div>Nothing</div>
+      <div>
+        {this.state.editing ? this.editForm() : this.editButton()}
+      </div>
     )
   }
 }
