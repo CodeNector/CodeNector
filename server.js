@@ -12,6 +12,13 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(routes);
 
+app.post('/login', passport.authenticate('local'), function(req, res) {
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+    res.redirect('/users/' + req.user.username);
+  });
+
 app.listen(PORT, function() {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
+
