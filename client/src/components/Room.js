@@ -5,6 +5,7 @@ import * as actions from '../actions/challengesActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import io from 'socket.io-client';
+
 import 'brace/mode/javascript';
 import 'brace/theme/solarized_dark';
 
@@ -16,7 +17,7 @@ class Room extends Component {
 		this.state = {code: ''};
 		socket.on('receive code', payload => {
 			this.updateCodeFromSockets(payload);
-		})
+		});
 		
 	}
 
