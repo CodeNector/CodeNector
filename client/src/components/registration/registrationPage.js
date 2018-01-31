@@ -30,6 +30,7 @@ class Register extends Component {
           //put value from fields here. 
           username: this.state.username,
           password: this.state.password,
+          confirmpassword: this.state.confirmpassword,
           firstName: this.state.firstName,
           lastName: this.state.lastName
         })

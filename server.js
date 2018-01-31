@@ -12,6 +12,7 @@ const io = socketIO(server);
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
@@ -20,7 +21,6 @@ const flash = require('connect-flash');
 //connect to the db - Danny -
 mongoose.connect('mongodb://localhost/CodeNector');
 const db = mongoose.connection;
-
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
