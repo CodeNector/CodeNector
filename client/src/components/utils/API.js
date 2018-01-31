@@ -5,7 +5,7 @@ export default {
     return axios.get("/register");
   },
 
-  login: function(LoginInfo) {
+  login: function() {
     return axios.get("/login");
   },
 
@@ -21,8 +21,8 @@ export default {
     });
   },
 
-  submitLogin: function() {
-    return axios.post("/login")
+  submitLogin: function(LoginInfo) {
+    return axios.post("/login", LoginInfo)
     .then(function (response) {
       console.log(response);
       console.log("hitting login");

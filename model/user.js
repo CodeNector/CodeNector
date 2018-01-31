@@ -4,7 +4,7 @@ const bcrpyt = require('bcryptjs');
 
 // UserSchema
 var UserSchema = mongoose.Schema({
-    username: {type: String},
+    username: {type: String, index: true},
     password: {type: String},
     firstName: {type: String},
     lastName: {type: String}
@@ -25,6 +25,7 @@ module.exports.createUser = function (newUser, callback){
 
 // gets a user by the username
 module.exports.getUserByUsername = function(username, callback){
+    console.log("getting user by username");
     var query = {username: username};
     User.findOne(query, callback);
 }
@@ -35,6 +36,7 @@ module.exports.getUserById = function(id, callback){
 
 module.exports.comparePassword = function(candidatePassword, hash, callback){
     // usebycrpt to check pw 
+    console.log("comparing passsword - modals");
     bcrpyt.compare(candidatePassword, hash, function(err, isMatch){
         if(err) throw err;
         callback(null, isMatch);

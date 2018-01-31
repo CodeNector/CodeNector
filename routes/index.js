@@ -55,6 +55,7 @@ router.post('/register', function(req, res) {
 // this is the passport local strategy. 
 passport.use(new LocalStrategy(
 	function(username, password, done) {
+	  console.log("local startegy is starting");
 	  User.getUserByUsername(username, function(err, user){
 		if(err) throw err;
 		//check to see if its not a user 
@@ -65,12 +66,14 @@ passport.use(new LocalStrategy(
 		// if there is an existing user then we need to compare the password. 
 		User.comparePassword(password, user.password, function(err, isMatch){
 			if(err) throw err;
-
+			console.log("comparing pw is starting");
 			//if the pw match then we return done wtih the user. else tell the user the pw was incorrect.
 			if(isMatch){
+				console.log("comparing pw is successful");
 				return done(null, user);
 			}
 			else{
+				console.log("comparing pw is unsuccessful");
 				return done(null, false, {message: 'Password is incorrect.'})
 			}
 		})
@@ -92,8 +95,9 @@ router.post('/login',
 	passport.authenticate('local', {successRedirect: '/', faliureRedirect:'/login', failureFlash: true}),function(req, res) {
     // If this function gets called, authentication was successful.
 	// `req.user` contains the authenticated user.
-	
+
 	console.log(req.body);
+	res.send("login was hit.")
 	//this is supposed to redirect user to users/username - 
     console.log("login hit this part.")
 });
