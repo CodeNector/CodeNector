@@ -8,11 +8,23 @@ const socketIO = require('socket.io');
 const server = http.createServer(app);
 const io = socketIO(server);
 
+// - Danny
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const mongoose = require('mongoose');
+
+//connect to the db - Danny -
+mongoose.connect('mongodb://localhost/CodeNector');
+const db = mongoose.connection;
+
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static('client/build'));
 }
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(routes);
 

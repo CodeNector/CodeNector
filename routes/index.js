@@ -10,7 +10,7 @@ const router = require("express").Router();
 router.post('/register', function(req, res) {
 	// handle user information when they sign up
 	console.log(req.body);
-	// this is retunring undefined for some reason?
+	
 	
 	// validation example. 
 	// var name = req.body.name; 

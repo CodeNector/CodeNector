@@ -25,9 +25,15 @@
   "dependencies": {
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "faker": "^4.1.0",
     "http": "^0.0.0",
+    "jsonwebtoken": "^8.1.1",
+    "mongoose": "^5.0.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "react-scripts": "^1.1.0",
     "socket.io": "^2.0.4"
   }
