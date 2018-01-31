@@ -8,7 +8,7 @@ const socketIO = require('socket.io');
 const server = http.createServer(app);
 const io = socketIO(server);
 
-// - Danny
+// - Danny added this for passport. 
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -22,15 +22,56 @@ mongoose.connect('mongodb://localhost/CodeNector');
 const db = mongoose.connection;
 
 
-
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static('client/build'));
 }
 
+// Body parser 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// Passport middle ware --
+app.use(cookieParser());
+
+// Passport init
+app.use(passport.initialize());
+app.use(passport.session());
+
+//this is for important for login stuff
+app.use(require('express-session')({
+	secret: "secret String here - be sure to make this hidden when we go live",
+	resave: false,
+	saveUninitialized: false
+}));
+
+// Youtube told me to do this. 
+app.use(expressValidator({
+	errorFormatter: function(param, msg, value){
+	  var namespace = param.split('.')
+	  , root = namespace.shift()
+	  , formParam = root;
+  
+	  while(namespace.length) {
+		formParam += '[' + namespace.shift() + ']';
+	  }
+	  return {
+		param: formParam,
+		msg: msg,
+		value: value
+	  };
+	}
+}));
+
+app.use(flash());
+app.use(function (req, res, next){
+	res.locals.success_msg = req.flash('success_msg');
+	res.locals.error_msg = req.flash('error_msg');
+	res.locals.error = req.flash('error');
+	next();
+});
+
+// End -- Passport middle ware --
 app.use(routes);
 
 
