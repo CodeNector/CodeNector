@@ -5,7 +5,7 @@ export default {
     return axios.get("/register");
   },
 
-  login: function() {
+  login: function(LoginInfo) {
     return axios.get("/login");
   },
 
@@ -22,6 +22,14 @@ export default {
   },
 
   submitLogin: function() {
-    return axios.post("/login");
+    return axios.post("/login")
+    .then(function (response) {
+      console.log(response);
+      console.log("hitting login");
+    })
+    .catch(function (error) {
+      console.log(error);
+      console.log("error at login");
+    });
   }
 };

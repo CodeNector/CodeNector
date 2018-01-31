@@ -23,6 +23,16 @@ class Login extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         //make post rquest here to /login
+        API.submitLogin({
+          //put value from fields here. 
+          username: this.state.username,
+          password: this.state.password,
+        })
+        .then(function (res){
+          console.log("response from server at login.");
+          // TODO add code to redirect 
+        })
+        .catch(err => console.log(err));
 
   };
 
@@ -43,7 +53,7 @@ class Login extends Component {
           value={this.state.password}
           onChange={this.handleInputChange}
         />
-        <button onClick={this.handleFormSubmit}>Submit</button>
+        <button onClick={this.handleFormSubmit}>Login</button>
       </form>
     );
   }

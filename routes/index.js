@@ -75,15 +75,27 @@ passport.use(new LocalStrategy(
 			}
 		})
 	  })
-	}));
+	}
+));
+
+passport.serializeUser(function(user, done) {
+	done(null, user.id);
+});
+  
+passport.deserializeUser(function(id, done) {
+	User.getUserById(id, function(err, user) {
+	  done(err, user);
+	});
+});
 
 router.post('/login', 
 	passport.authenticate('local', {successRedirect: '/', faliureRedirect:'/login', failureFlash: true}),function(req, res) {
     // If this function gets called, authentication was successful.
 	// `req.user` contains the authenticated user.
 	
+	console.log(req.body);
 	//this is supposed to redirect user to users/username - 
-    res.redirect('/users/' + req.user.username);
+    console.log("login hit this part.")
 });
 
 // If no API routes are hit, send the React app

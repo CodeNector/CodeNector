@@ -14,6 +14,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
+const passport = require('passport');
 
 //connect to the db - Danny -
 mongoose.connect('mongodb://localhost/CodeNector');
