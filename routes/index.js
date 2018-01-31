@@ -2,6 +2,8 @@ const path = require("path");
 const router = require("express").Router();
 // const apiRoutes = require("./api");
 const User = require('../model/user');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 // API Routes
 // router.use("/api", apiRoutes);
@@ -50,8 +52,38 @@ router.post('/register', function(req, res) {
 	  }
 });
 
-router.post('/login', function(req, res){
+// this is the passport local strategy. 
+passport.use(new LocalStrategy(
+	function(username, password, done) {
+	  User.getUserByUsername(username, function(err, user){
+		if(err) throw err;
+		//check to see if its not a user 
+		if(!user){
+			return done(null, false, {message: 'Unknown User.'});
+		}
 
+		// if there is an existing user then we need to compare the password. 
+		User.comparePassword(password, user.password, function(err, isMatch){
+			if(err) throw err;
+
+			//if the pw match then we return done wtih the user. else tell the user the pw was incorrect.
+			if(isMatch){
+				return done(null, user);
+			}
+			else{
+				return done(null, false, {message: 'Password is incorrect.'})
+			}
+		})
+	  })
+	}));
+
+router.post('/login', 
+	passport.authenticate('local', {successRedirect: '/', faliureRedirect:'/login', failureFlash: true}),function(req, res) {
+    // If this function gets called, authentication was successful.
+	// `req.user` contains the authenticated user.
+	
+	//this is supposed to redirect user to users/username - 
+    res.redirect('/users/' + req.user.username);
 });
 
 // If no API routes are hit, send the React app

@@ -34,7 +34,11 @@ class Register extends Component {
           firstName: this.state.firstName,
           lastName: this.state.lastName
         })
-        .then(res => console.log("registered!"))
+        .then(function (res){
+          console.log("registered!")
+          // TODO add code to redirect 
+          console.log(event);
+        })
         .catch(err => console.log(err));
     }; 
 

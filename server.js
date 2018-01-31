@@ -10,9 +10,6 @@ const io = socketIO(server);
 
 // - Danny added this for passport. 
 const bodyParser = require('body-parser');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const mongo = require('mongodb');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
@@ -44,8 +41,7 @@ app.use(require('express-session')({
 	resave: false,
 	saveUninitialized: false
 }));
-
-// Youtube told me to do this. 
+ 
 app.use(expressValidator({
 	errorFormatter: function(param, msg, value){
 	  var namespace = param.split('.')
@@ -95,11 +91,6 @@ io.on('connection', socket => {
 
 });
 
-// app.post('/login', passport.authenticate('local'), function(req, res) {
-//     // If this function gets called, authentication was successful.
-//     // `req.user` contains the authenticated user.
-//     res.redirect('/users/' + req.user.username);
-//   });
 
 server.listen(PORT, function() {
 	console.log(`🌎 ==> Server now on port ${PORT}!`);
