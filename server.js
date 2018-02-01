@@ -8,12 +8,69 @@ const socketIO = require('socket.io');
 const server = http.createServer(app);
 const io = socketIO(server);
 
+// - Danny added this for passport. 
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+const expressValidator = require('express-validator');
+const flash = require('connect-flash');
+const passport = require('passport');
+
+//connect to the db - Danny -
+mongoose.connect('mongodb://localhost/CodeNector');
+const db = mongoose.connection;
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static('client/build'));
 }
 
+// Body parser 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Passport middle ware --
+app.use(cookieParser());
+
+// Passport init
+app.use(passport.initialize());
+app.use(passport.session());
+
+//this is for important for login stuff
+app.use(require('express-session')({
+	secret: "secret String here - be sure to make this hidden when we go live",
+	resave: false,
+	saveUninitialized: false
+}));
+ 
+app.use(expressValidator({
+	errorFormatter: function(param, msg, value){
+	  var namespace = param.split('.')
+	  , root = namespace.shift()
+	  , formParam = root;
+  
+	  while(namespace.length) {
+		formParam += '[' + namespace.shift() + ']';
+	  }
+	  return {
+		param: formParam,
+		msg: msg,
+		value: value
+	  };
+	}
+}));
+
+app.use(flash());
+app.use(function (req, res, next){
+	res.locals.success_msg = req.flash('success_msg');
+	res.locals.error_msg = req.flash('error_msg');
+	res.locals.error = req.flash('error');
+	//if user exists we will access it from anywhere if not we get null. 
+	res.locals.user = req.user || null; 
+	next();
+});
+
+// End -- Passport middle ware --
 app.use(routes);
 
 
@@ -37,11 +94,6 @@ io.on('connection', socket => {
 
 });
 
-// app.post('/login', passport.authenticate('local'), function(req, res) {
-//     // If this function gets called, authentication was successful.
-//     // `req.user` contains the authenticated user.
-//     res.redirect('/users/' + req.user.username);
-//   });
 
 server.listen(PORT, function() {
 	console.log(`🌎 ==> Server now on port ${PORT}!`);

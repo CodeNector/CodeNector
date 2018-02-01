@@ -8,6 +8,8 @@ import HomePage from './components/pages/HomePage';
 import Room from './components/Room';
 import 'bootstrap/dist/css/bootstrap.css';
 
+import Login from './components/login/login'
+import Register from './components/registration/registrationPage'
 
 const store = configureStore();
 
@@ -17,8 +19,13 @@ render(
 			<div>
 				<Route exact path="/" component={HomePage} />
 				<Route exact path="/rooms/:id" component={Room} />
+
+				
+				<Route exact path="/register" component={Register} />
+				<Route exact path="/login" component={Login} />
 			</div>
 		</Router>
 	</Provider>,
 	document.getElementById('root')
 );
+// - danny - I added the register and login routes here... seems to link and route correctly. 
