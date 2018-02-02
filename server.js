@@ -17,7 +17,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 
 //connect to the db - Danny -
-mongoose.connect('mongodb://localhost/CodeNector');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/CodeNector');
 const db = mongoose.connection;
 
 // Serve up static assets (usually on heroku)

@@ -1,7 +1,7 @@
 const path = require("path");
 const router = require("express").Router();
 // const apiRoutes = require("./api");
-const User = require('../model/user');
+const User = require('../models/user');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
