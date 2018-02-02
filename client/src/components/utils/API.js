@@ -14,7 +14,8 @@ export default {
     // or respond with registered if registered. 
     return axios.post("/register", userInfo)
     .then(function (response) {
-      console.log(response);
+      console.log(response.data);
+      return response.data;
     })
     .catch(function (error) {
       console.log(error);

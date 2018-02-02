@@ -32,6 +32,9 @@ router.post('/register', function(req, res) {
 	if(errors){
 	  console.log('There was a validation error');
 	  // respond with the errors object? - not working 
+	  // need to bundle the errors into one bigger object. 
+	  console.log("errors:" + errors);
+	  res.json(errors);
 	} else{
 		console.log("no errors");
 		var newUser = new User({
@@ -48,7 +51,7 @@ router.post('/register', function(req, res) {
 
 		req.flash('success_msg', 'You are registered and can now login');
 		//need to redirect here. 
-		res.redirect('/');
+		res.json({registrationSuccess: true});
 	  }
 });
 

@@ -37,6 +37,8 @@ class Register extends Component {
         .then(function (res){
           console.log("registered!");
           // TODO add code to redirect 
+          console.log("response.data: " + res); 
+
         })
         .catch(err => console.log(err));
     }; 
