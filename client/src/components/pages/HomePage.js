@@ -34,6 +34,10 @@ class HomePage extends Component {
 					<p>
 						<Link to='/register'> Need an account? </Link>
 					</p>
+					<p>
+						<Link to='/logout'> Logout </Link>
+					</p>
+			
 			
 			</div>
 		);

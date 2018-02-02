@@ -31,5 +31,17 @@ export default {
       console.log(error);
       console.log("error at login");
     });
+  },
+
+  Logout: function(LoginInfo) {
+    return axios.get("/logout")
+    .then(function (response) {
+      console.log(response);
+      console.log("hitting logout");
+    })
+    .catch(function (error) {
+      console.log(error);
+      console.log("error at logout");
+    });
   }
 };

@@ -60,7 +60,6 @@ app.use(expressValidator({
 	}
 }));
 
-// comment 
 app.use(flash());
 app.use(function (req, res, next){
 	res.locals.success_msg = req.flash('success_msg');

@@ -102,9 +102,30 @@ router.post('/login',
     console.log("login hit this part.")
 });
 
+router.get('/logout', function(req, res){
+	// code to handle logout. 
+	req.logout();
+
+	req.flash('success_msg', 'You are logged out.');
+	res.send(console.log("logged out"));
+
+});
+
 // If no API routes are hit, send the React app
-router.use(function (req, res) {
+router.use(ensureAuthenticated, function (req, res) {
+	console.log("user is logged in: " + ensureAuthenticated);
 	res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
+
+// this function is supposed to see if the user is logged in or not. 
+function ensureAuthenticated(req, res, next){
+	if(req.isAuthenticated()){
+
+		return next();
+	} else {
+		console.log("not logged in");
+		res.send("not authenticated");
+	}
+}
 
 module.exports = router;
