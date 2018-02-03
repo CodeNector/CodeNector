@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API"
+import { Button, Form, FormGroup, Label, Input, FormText, Container} from 'reactstrap';
 
 class Register extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -43,44 +44,59 @@ class Register extends Component {
 
   render() {
     return (
-      <form>
-        <input
+      <Container>
+      <Form>
+        <FormGroup>
+        <Label for="username">Username</Label>
+        <Input
           type="text"
           placeholder="Username"
           name="username"
           value={this.state.username}
           onChange={this.handleInputChange}
         />
-        <input
+        </FormGroup>
+        <FormGroup>
+        <Label for="password">Password</Label>
+        <Input
           type="password"
           placeholder="Password"
           name="password"
           value={this.state.password}
           onChange={this.handleInputChange}
         />
-        <input
+        {/* <Label for="password">Password</Label> */}
+        <Input
           type="password"
-          placeholder="confirmPassword"
+          placeholder="Confirm Password"
           name="confirmpassword"
           value={this.state.confirmpassword}
           onChange={this.handleInputChange}
         />
-        <input
+        </FormGroup>
+        <FormGroup>
+        <Label for="firstName">First Name</Label>
+        <Input
           type="firstName"
           placeholder="firstName"
           name="firstName"
           value={this.state.firstName}
           onChange={this.handleInputChange}
         />
-        <input
+        </FormGroup>
+        <FormGroup>
+        <Label for="lastName">Last Name</Label>
+        <Input
           type="lastName"
           placeholder="lastName"
           name="lastName"
           value={this.state.lastName}
           onChange={this.handleInputChange}
         />
-        <button onClick={this.handleFormSubmit}>Register</button>
-      </form>
+        </FormGroup>
+        <Button onClick={this.handleFormSubmit}>Register</Button>
+      </Form>
+      </Container>
     );
   }
 }

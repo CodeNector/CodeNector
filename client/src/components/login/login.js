@@ -44,7 +44,7 @@ class Login extends Component {
         <FormGroup>
         <Label for="username">Username</Label>
         <Input
-          type="text"
+          type="email"
           placeholder="Username"
           name="username"
           value={this.state.username}
