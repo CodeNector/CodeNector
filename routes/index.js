@@ -115,7 +115,7 @@ router.get('/logout', function(req, res){
 });
 
 // If no API routes are hit, send the React app
-router.use(ensureAuthenticated, function (req, res) {
+router.use(function (req, res) {
 	console.log("user is logged in: " + ensureAuthenticated);
 	res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
