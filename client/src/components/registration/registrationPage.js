@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import HomePage from '../pages/HomePage';
 import API from "../utils/API"
 
 class Register extends Component {
@@ -9,7 +10,15 @@ class Register extends Component {
         confirmPassword: "",
         firstName: "",
         lastName: "",
+        isRegistrationSuccess: false,
+        errors: []
     };
+
+    RoutetoHomePage = (state) => {
+      return (
+        <HomePage />
+      );
+    }
     
     // handle any changes to the input fields
     handleInputChange = event => {
@@ -38,12 +47,25 @@ class Register extends Component {
           console.log("registered!");
           // TODO add code to redirect 
           console.log("response.data: " + res); 
+          if(res.registrationSuccess){
+            // do stuff to after registration. 
+            this.setState({
+              isRegistrationSuccess: true
+            });
+          } else {
+            console.log (res); 
+            // for each index of the array returned we need to display it so the user can see the error. 
+            this.setState({
+              errors: res
+            });
+          }
 
         })
         .catch(err => console.log(err));
     }; 
 
   render() {
+
     return (
       <form>
         <input

@@ -127,7 +127,7 @@ function ensureAuthenticated(req, res, next){
 		return next();
 	} else {
 		console.log("not logged in");
-		res.send("not authenticated");
+		res.json({loggedin: false});
 	}
 }
 

@@ -5,10 +5,8 @@ import { bindActionCreators } from 'redux';
 import * as challengesActions from '../../actions/challengesActions';
 import * as userActions from '../../actions/userActions';
 import ChallengesList from '../ChallengesList';
-import ChooseUserName from '../ChooseUserName';
+import Nav from '../NavBar/nav'
 
-// - danny - Added the link to link the login and register pages. 
-import {Link} from 'react-router-dom'
 
 class HomePage extends Component {
 	componentDidMount() {
@@ -24,20 +22,9 @@ class HomePage extends Component {
 	render() {
 		return (
 			<div>
-				
-					<ChooseUserName userName={this.props.userName} chooseUserName={this.chooseUserName.bind(this)} />
-					<ChallengesList challenges={this.props.challenges} />
-
-					<p>
-						<Link to='/login'> Login </Link>
-					</p>
-					<p>
-						<Link to='/register'> Need an account? </Link>
-					</p>
-					<p>
-						<Link to='/logout'> Logout </Link>
-					</p>
-			
+				<Nav />
+					
+                <ChallengesList challenges={this.props.challenges} />
 			
 			</div>
 		);
