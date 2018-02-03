@@ -32,4 +32,3 @@ render(
 	</Provider>,
 	document.getElementById('root')
 );
-// - danny - I added the register and login routes here... seems to link and route correctly. 

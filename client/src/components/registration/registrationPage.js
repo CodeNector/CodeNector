@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import HomePage from '../pages/HomePage';
 import API from "../utils/API"
 
+
 class Register extends Component {
     // Setting the initial values of this.state.username and this.state.password
     state = {
@@ -10,15 +11,9 @@ class Register extends Component {
         confirmPassword: "",
         firstName: "",
         lastName: "",
-        isRegistrationSuccess: false,
-        errors: []
-    };
+        isRegistered: false
 
-    RoutetoHomePage = (state) => {
-      return (
-        <HomePage />
-      );
-    }
+    };
     
     // handle any changes to the input fields
     handleInputChange = event => {
@@ -30,6 +25,15 @@ class Register extends Component {
         [name]: value
         });
     };
+
+    completeRegistration = () => {
+      this.setState({
+        isRegistered: true
+      })
+      //reroute here.
+      //this.props.push('/');
+    }
+
 
     // here we need to send the username and password to the server.. so that passport can ddo stuff with that. 
     handleFormSubmit = event => {
@@ -46,18 +50,14 @@ class Register extends Component {
         .then(function (res){
           console.log("registered!");
           // TODO add code to redirect 
-          console.log("response.data: " + res); 
+          console.log("response.data: " + res.registrationSuccess); 
           if(res.registrationSuccess){
             // do stuff to after registration. 
-            this.setState({
-              isRegistrationSuccess: true
-            });
+            this.completeRegistration()
           } else {
             console.log (res); 
             // for each index of the array returned we need to display it so the user can see the error. 
-            this.setState({
-              errors: res
-            });
+            //this.showErrors()
           }
 
         })
@@ -65,48 +65,49 @@ class Register extends Component {
     }; 
 
   render() {
+    const homePage = (<HomePage />);
+    const registrationForm = (<form>
+      <input
+        type="text"
+        placeholder="Username"
+        name="username"
+        value={this.state.username}
+        onChange={this.handleInputChange}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        name="password"
+        value={this.state.password}
+        onChange={this.handleInputChange}
+      />
+      <input
+        type="password"
+        placeholder="confirmPassword"
+        name="confirmpassword"
+        value={this.state.confirmpassword}
+        onChange={this.handleInputChange}
+      />
+      <input
+        type="firstName"
+        placeholder="firstName"
+        name="firstName"
+        value={this.state.firstName}
+        onChange={this.handleInputChange}
+      />
+      <input
+        type="lastName"
+        placeholder="lastName"
+        name="lastName"
+        value={this.state.lastName}
+        onChange={this.handleInputChange}
+      />
+      <button onClick={this.handleFormSubmit}>Register</button>
+    </form>);
 
-    return (
-      <form>
-        <input
-          type="text"
-          placeholder="Username"
-          name="username"
-          value={this.state.username}
-          onChange={this.handleInputChange}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={this.state.password}
-          onChange={this.handleInputChange}
-        />
-        <input
-          type="password"
-          placeholder="confirmPassword"
-          name="confirmpassword"
-          value={this.state.confirmpassword}
-          onChange={this.handleInputChange}
-        />
-        <input
-          type="firstName"
-          placeholder="firstName"
-          name="firstName"
-          value={this.state.firstName}
-          onChange={this.handleInputChange}
-        />
-        <input
-          type="lastName"
-          placeholder="lastName"
-          name="lastName"
-          value={this.state.lastName}
-          onChange={this.handleInputChange}
-        />
-        <button onClick={this.handleFormSubmit}>Register</button>
-      </form>
-    );
+    return this.state.isRegistered ? homePage : registrationForm 
   }
+
 }
 
 export default Register;
