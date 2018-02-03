@@ -29,7 +29,7 @@ class Login extends Component {
           username: this.state.username,
           password: this.state.password,
         })
-        .then(function (res){
+        .then(res => {
           console.log("response from server at login.");
           // TODO add code to redirect 
         })

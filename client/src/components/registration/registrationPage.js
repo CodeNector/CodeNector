@@ -11,7 +11,14 @@ class Register extends Component {
         confirmPassword: "",
         firstName: "",
         lastName: "",
-        isRegistered: false
+        isRegistered: false,
+        errors: [],
+        firstnameError: "",
+        lastnameError: "", 
+        passwordError: "",
+        passwordMatchError: "",
+        usernameError: "",
+
 
     };
     
@@ -30,8 +37,40 @@ class Register extends Component {
       this.setState({
         isRegistered: true
       })
-      //reroute here.
-      //this.props.push('/');
+    }
+
+    loopThroughTheErrors = (errors) => {
+      this.setState({
+        errors: errors
+      });
+
+      for(var i=0; i<errors.length; i++){
+        if(errors[i].param === "username"){
+          this.setState({
+            usernameError: errors[i].msg
+          })
+        }
+        if(errors[i].param === "password"){
+          this.setState({
+            passwordError: errors[i].msg
+          })
+        }
+        if(errors[i].param === "confirmpassword"){
+          this.setState({
+            passwordMatchError: errors[i].msg
+          })
+        }
+        if(errors[i].param ==="firstName"){
+          this.setState({
+            firstnameError: errors[i].msg
+          })
+        }
+        if(errors[i].param ==="lastName"){
+          this.setState({
+            lastnameError: errors[i].msg
+          })
+        }
+      }
     }
 
 
@@ -47,19 +86,15 @@ class Register extends Component {
           firstName: this.state.firstName,
           lastName: this.state.lastName
         })
-        .then(function (res){
-          console.log("registered!");
-          // TODO add code to redirect 
-          console.log("response.data: " + res.registrationSuccess); 
+        .then(res => {
+          console.log("response.data: " + res); 
           if(res.registrationSuccess){
             // do stuff to after registration. 
-            this.completeRegistration()
+            this.completeRegistration();
           } else {
-            console.log (res); 
             // for each index of the array returned we need to display it so the user can see the error. 
-            //this.showErrors()
+            this.loopThroughTheErrors(res);
           }
-
         })
         .catch(err => console.log(err));
     }; 
@@ -88,6 +123,7 @@ class Register extends Component {
         value={this.state.confirmpassword}
         onChange={this.handleInputChange}
       />
+      {this.state.firstnameError ? <div> The last name field is required </div>  :  null}
       <input
         type="firstName"
         placeholder="firstName"
@@ -95,6 +131,7 @@ class Register extends Component {
         value={this.state.firstName}
         onChange={this.handleInputChange}
       />
+      {this.state.lastnameError ? <div> The last name field is required </div>  :  null}
       <input
         type="lastName"
         placeholder="lastName"
