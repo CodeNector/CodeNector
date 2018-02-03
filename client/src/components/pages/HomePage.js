@@ -7,6 +7,11 @@ import * as userActions from '../../actions/userActions';
 import ChallengesList from '../ChallengesList';
 import Nav from '../NavBar/nav'
 
+import ChooseUserName from '../ChooseUserName';
+// import { Container } from 'reactstrap';
+
+// - danny - Added the link to link the login and register pages. 
+import {Link} from 'react-router-dom';
 
 class HomePage extends Component {
 	componentDidMount() {
@@ -21,11 +26,18 @@ class HomePage extends Component {
 
 	render() {
 		return (
-			<div>
-				<Nav />
-					
-                <ChallengesList challenges={this.props.challenges} />
-			
+			<div className="container">
+				
+					<ChooseUserName userName={this.props.userName} chooseUserName={this.chooseUserName.bind(this)} />
+					<ChallengesList challenges={this.props.challenges} />
+{/* 
+					<p>
+						<Link to='/login'> Login </Link>
+					</p>
+					<p>
+						<Link to='/register'> Need an account? </Link>
+					</p>
+			 */}
 			</div>
 		);
 	}

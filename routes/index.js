@@ -1,12 +1,12 @@
 const path = require("path");
 const router = require("express").Router();
-// const apiRoutes = require("./api");
-const User = require('../model/user');
+const apiRoutes = require("./api");
+const User = require('../models/user');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 // API Routes
-// router.use("/api", apiRoutes);
+router.use('/api', apiRoutes);
 
 // - Danny - 
 // Route for registration 
@@ -58,8 +58,8 @@ router.post('/register', function(req, res) {
 // this is the passport local strategy. 
 passport.use(new LocalStrategy(
 	function(username, password, done) {
-	  console.log("local startegy is starting");
-	  User.getUserByUsername(username, function(err, user){
+		console.log("local startegy is starting");
+		User.getUserByUsername(username, function(err, user){
 		if(err) throw err;
 		//check to see if its not a user 
 		if(!user){
@@ -80,29 +80,29 @@ passport.use(new LocalStrategy(
 				return done(null, false, {message: 'Password is incorrect.'})
 			}
 		})
-	  })
+		})
 	}
 ));
 
 passport.serializeUser(function(user, done) {
 	done(null, user.id);
 });
-  
+	
 passport.deserializeUser(function(id, done) {
 	User.getUserById(id, function(err, user) {
-	  done(err, user);
+		done(err, user);
 	});
 });
 
 router.post('/login', 
 	passport.authenticate('local', {successRedirect: '/', faliureRedirect:'/login', failureFlash: true}),function(req, res) {
-    // If this function gets called, authentication was successful.
+		// If this function gets called, authentication was successful.
 	// `req.user` contains the authenticated user.
 
 	console.log(req.body);
 	res.send("login was hit.")
 	//this is supposed to redirect user to users/username - 
-    console.log("login hit this part.")
+		console.log("login hit this part.")
 });
 
 router.get('/logout', function(req, res){

@@ -17,7 +17,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 
 //connect to the db - Danny -
-mongoose.connect('mongodb://localhost/CodeNector');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/CodeNector');
 const db = mongoose.connection;
 
 // Serve up static assets (usually on heroku)
@@ -38,25 +38,25 @@ app.use(passport.session());
 
 //this is for important for login stuff
 app.use(require('express-session')({
-	secret: "secret String here - be sure to make this hidden when we go live",
+	secret: 'secret String here - be sure to make this hidden when we go live',
 	resave: false,
 	saveUninitialized: false
 }));
  
 app.use(expressValidator({
 	errorFormatter: function(param, msg, value){
-	  var namespace = param.split('.')
-	  , root = namespace.shift()
-	  , formParam = root;
-  
-	  while(namespace.length) {
-		formParam += '[' + namespace.shift() + ']';
-	  }
-	  return {
-		param: formParam,
-		msg: msg,
-		value: value
-	  };
+		var namespace = param.split('.')
+			, root = namespace.shift()
+			, formParam = root;
+
+		while(namespace.length) {
+			formParam += '[' + namespace.shift() + ']';
+		}
+		return {
+			param: formParam,
+			msg: msg,
+			value: value
+		};
 	}
 }));
 
@@ -71,6 +71,13 @@ app.use(function (req, res, next){
 });
 
 // End -- Passport middle ware --
+
+app.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+	next();
+});
+
 app.use(routes);
 
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import API from "../utils/API";
+import { Button, Form, FormGroup, Label, Input, FormText, Container} from 'reactstrap';
 
 class Login extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -38,23 +39,33 @@ class Login extends Component {
 
   render() {
     return (
-      <form>
-        <input
+      <Container>
+      <Form>
+        <FormGroup>
+        <Label for="username">Username</Label>
+        <Input
           type="text"
           placeholder="Username"
           name="username"
           value={this.state.username}
           onChange={this.handleInputChange}
         />
-        <input
+        </FormGroup>
+        <FormGroup>
+        <Label for="password">Password</Label>
+          
+        <Input
           type="password"
           placeholder="Password"
           name="password"
           value={this.state.password}
           onChange={this.handleInputChange}
         />
-        <button onClick={this.handleFormSubmit}>Login</button>
-      </form>
+        <Button onClick={this.handleFormSubmit}>Login</Button>
+      </FormGroup>
+        
+      </Form>
+      </Container>
     );
   }
 }
