@@ -1,12 +1,12 @@
 const path = require("path");
 const router = require("express").Router();
-// const apiRoutes = require("./api");
+const apiRoutes = require("./api");
 const User = require('../models/user');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 // API Routes
-// router.use("/api", apiRoutes);
+router.use('/api', apiRoutes);
 
 // - Danny - 
 // Route for registration 

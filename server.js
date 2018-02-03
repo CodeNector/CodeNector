@@ -38,7 +38,7 @@ app.use(passport.session());
 
 //this is for important for login stuff
 app.use(require('express-session')({
-	secret: "secret String here - be sure to make this hidden when we go live",
+	secret: 'secret String here - be sure to make this hidden when we go live',
 	resave: false,
 	saveUninitialized: false
 }));
@@ -71,6 +71,13 @@ app.use(function (req, res, next){
 });
 
 // End -- Passport middle ware --
+
+app.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+	next();
+});
+
 app.use(routes);
 
 
