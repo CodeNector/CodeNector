@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import HomePage from '../pages/HomePage';
 import API from "../utils/API"
+import { Button, Form, FormGroup, Label, Input, FormText, Container} from 'reactstrap';
 
 
 class Register extends Component {

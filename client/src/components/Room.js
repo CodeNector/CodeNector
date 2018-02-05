@@ -5,6 +5,7 @@ import * as actions from '../actions/challengesActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import io from 'socket.io-client';
+// import { Container } from 'reactstrap';
 
 import 'brace/mode/javascript';
 import 'brace/theme/solarized_dark';
@@ -60,9 +61,11 @@ class Room extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="container">
 				{console.log(this.props.challenge)}
 				<h1>{this.props.challenge.title}</h1>
+				<p>{this.props.challenge.description}</p>
+
 				<AceEditor 
 					value={this.state.code}
 					onChange={this.updateCodeInState.bind(this)}
