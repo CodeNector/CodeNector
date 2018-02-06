@@ -1,12 +1,17 @@
 import React, { Component } from "react";
+import HomePage from '../pages/HomePage';
 import API from "../utils/API";
 import { Button, Form, FormGroup, Label, Input, FormText, Container} from 'reactstrap';
+import {loginUser} from "../../actions/userActions";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 class Login extends Component {
     // Setting the initial values of this.state.username and this.state.password
     state = {
         username: "",
-        password: ""
+        password: "",
+        isLoginSuccessful: false
     };
     
     // handle any changes to the input fields
@@ -32,42 +37,63 @@ class Login extends Component {
         .then(res => {
           console.log("response from server at login.");
           // TODO add code to redirect 
+          console.log(res.user)
+          this.props.onSuccessfulLogin(res.user);
         })
         .catch(err => console.log(err));
 
   };
 
   render() {
-    return (
+    console.log(this.props); 
+    const homePage = (<HomePage />);
+    const loginForm = (
       <Container>
-      <Form>
-        <FormGroup>
-        <Label for="username">Username</Label>
-        <Input
-          type="email"
-          placeholder="Username"
-          name="username"
-          value={this.state.username}
-          onChange={this.handleInputChange}
-        />
+        <Form>
+          <FormGroup>
+          <Label for="username">Username</Label>
+          <Input
+            type="email"
+            placeholder="Username"
+            name="username"
+            value={this.state.username}
+            onChange={this.handleInputChange}
+          />
+          </FormGroup>
+          <FormGroup>
+          <Label for="password">Password</Label>
+            
+          <Input
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={this.state.password}
+            onChange={this.handleInputChange}
+          />
+          <Button onClick={this.handleFormSubmit}>Login</Button>
         </FormGroup>
-        <FormGroup>
-        <Label for="password">Password</Label>
           
-        <Input
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={this.state.password}
-          onChange={this.handleInputChange}
-        />
-        <Button onClick={this.handleFormSubmit}>Login</Button>
-      </FormGroup>
-        
-      </Form>
+        </Form>
       </Container>
-    );
+      );
+
+      return this.state.isLoggedIn ? homePage : loginForm 
   }
 }
 
-export default Login;
+const mapStateToProps = (state, ownProps) => {
+  console.log("STATE FROM LOGIN : ", state)
+  return {user: state.currentUser.user};
+  
+  // so for other pages we want to map state props to users liek we are here ^ 
+  // then addd component will mpunt to the component - and in that function we will check for a user.. if user exists we are loggged in and we can show page - if not we will redirect to login page for now. 
+};
+
+const mapDispatchToProps = dispatch => {
+	return {onSuccessfulLogin: (user) => {
+    dispatch(loginUser(user))
+  }}
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -58,7 +58,6 @@ router.post('/register', function(req, res) {
 // this is the passport local strategy. 
 passport.use(new LocalStrategy(
 	function(username, password, done) {
-		console.log("local startegy is starting");
 		User.getUserByUsername(username, function(err, user){
 		if(err) throw err;
 		//check to see if its not a user 
@@ -94,15 +93,17 @@ passport.deserializeUser(function(id, done) {
 	});
 });
 
-router.post('/login', 
-	passport.authenticate('local', {successRedirect: '/', faliureRedirect:'/login', failureFlash: true}),function(req, res) {
+router.post('/login', passport.authenticate('local'),function(req, res) {
 		// If this function gets called, authentication was successful.
-	// `req.user` contains the authenticated user.
+		// `req.user` contains the authenticated user.
 
 	console.log(req.body);
-	res.send("login was hit.")
+	res.json({
+		user: req.user,
+		isLoginSuccessful: true
+	})
 	//this is supposed to redirect user to users/username - 
-		console.log("login hit this part.")
+	console.log("login hit this part.")
 });
 
 router.get('/logout', function(req, res){

@@ -27,6 +27,7 @@ export default {
     .then(function (response) {
       console.log(response);
       console.log("hitting login");
+      return response.data;
     })
     .catch(function (error) {
       console.log(error);
