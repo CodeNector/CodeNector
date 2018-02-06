@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import HomePage from '../pages/HomePage';
 import API from "../utils/API"
 import { Button, Form, FormGroup, Label, Input, FormText, Container} from 'reactstrap';
+import "./registrationPage.css";
 
 
 class Register extends Component {
@@ -14,14 +15,13 @@ class Register extends Component {
         lastName: "",
         isRegistered: false,
         errors: [],
-        firstnameError: "",
-        lastnameError: "", 
-        passwordError: "",
-        passwordMatchError: "",
-        usernameError: "",
-
-
+        firstnameError: false,
+        lastnameError: false, 
+        passwordError: false,
+        passwordMatchError: false,
+        usernameError: false
     };
+
     
     // handle any changes to the input fields
     handleInputChange = event => {
@@ -42,33 +42,42 @@ class Register extends Component {
 
     loopThroughTheErrors = (errors) => {
       this.setState({
-        errors: errors
+        errors: errors,
+        firstnameError: false,
+        lastnameError: false, 
+        passwordError: false,
+        passwordMatchError: false,
+        usernameError: false
       });
 
       for(var i=0; i<errors.length; i++){
         if(errors[i].param === "username"){
           this.setState({
-            usernameError: errors[i].msg
+            usernameError: true
           })
-        }
+        } 
+
         if(errors[i].param === "password"){
           this.setState({
-            passwordError: errors[i].msg
+            passwordError: true
           })
         }
+
         if(errors[i].param === "confirmpassword"){
           this.setState({
-            passwordMatchError: errors[i].msg
+            passwordMatchError: true
           })
         }
+
         if(errors[i].param ==="firstName"){
           this.setState({
-            firstnameError: errors[i].msg
+            firstnameError: true
           })
         }
+
         if(errors[i].param ==="lastName"){
           this.setState({
-            lastnameError: errors[i].msg
+            lastnameError: true
           })
         }
       }
@@ -114,6 +123,7 @@ class Register extends Component {
           value={this.state.username}
           onChange={this.handleInputChange}
         />
+        {this.state.usernameError ? <div id="errorMsg"> The username field is required </div>  :  null}
         </FormGroup>
         <FormGroup>
         <Label for="password">Password</Label>
@@ -124,6 +134,7 @@ class Register extends Component {
           value={this.state.password}
           onChange={this.handleInputChange}
         />
+        {this.state.passwordError ? <div id="errorMsg"> The password field is required </div>  :  null}
         {/* <Label for="password">Password</Label> */}
         <Input
           type="password"
@@ -132,6 +143,7 @@ class Register extends Component {
           value={this.state.confirmpassword}
           onChange={this.handleInputChange}
         />
+        {this.state.passwordMatchError ? <div id="errorMsg"> The passwords must match. </div>  :  null}
         </FormGroup>
         <FormGroup>
         <Label for="firstName">First Name</Label>
@@ -142,6 +154,7 @@ class Register extends Component {
           value={this.state.firstName}
           onChange={this.handleInputChange}
         />
+        {this.state.firstnameError ? <div id="errorMsg"> The first name field is required </div>  :  null}
         </FormGroup>
         <FormGroup>
         <Label for="lastName">Last Name</Label>
@@ -152,6 +165,7 @@ class Register extends Component {
           value={this.state.lastName}
           onChange={this.handleInputChange}
         />
+        {this.state.lastnameError ? <div id="errorMsg"> The last name field is required </div>  :  null}
         </FormGroup>
         <Button onClick={this.handleFormSubmit}>Register</Button>
       </Form>
