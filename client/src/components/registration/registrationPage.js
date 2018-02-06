@@ -102,46 +102,61 @@ class Register extends Component {
 
   render() {
     const homePage = (<HomePage />);
-    const registrationForm = (<form>
-      <input
-        type="text"
-        placeholder="Username"
-        name="username"
-        value={this.state.username}
-        onChange={this.handleInputChange}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        name="password"
-        value={this.state.password}
-        onChange={this.handleInputChange}
-      />
-      <input
-        type="password"
-        placeholder="confirmPassword"
-        name="confirmpassword"
-        value={this.state.confirmpassword}
-        onChange={this.handleInputChange}
-      />
-      {this.state.firstnameError ? <div> The last name field is required </div>  :  null}
-      <input
-        type="firstName"
-        placeholder="firstName"
-        name="firstName"
-        value={this.state.firstName}
-        onChange={this.handleInputChange}
-      />
-      {this.state.lastnameError ? <div> The last name field is required </div>  :  null}
-      <input
-        type="lastName"
-        placeholder="lastName"
-        name="lastName"
-        value={this.state.lastName}
-        onChange={this.handleInputChange}
-      />
-      <button onClick={this.handleFormSubmit}>Register</button>
-    </form>);
+    const registrationForm = (
+      <Container>
+      <Form>
+        <FormGroup>
+        <Label for="username">Username</Label>
+        <Input
+          type="text"
+          placeholder="Username"
+          name="username"
+          value={this.state.username}
+          onChange={this.handleInputChange}
+        />
+        </FormGroup>
+        <FormGroup>
+        <Label for="password">Password</Label>
+        <Input
+          type="password"
+          placeholder="Password"
+          name="password"
+          value={this.state.password}
+          onChange={this.handleInputChange}
+        />
+        {/* <Label for="password">Password</Label> */}
+        <Input
+          type="password"
+          placeholder="Confirm Password"
+          name="confirmpassword"
+          value={this.state.confirmpassword}
+          onChange={this.handleInputChange}
+        />
+        </FormGroup>
+        <FormGroup>
+        <Label for="firstName">First Name</Label>
+        <Input
+          type="firstName"
+          placeholder="firstName"
+          name="firstName"
+          value={this.state.firstName}
+          onChange={this.handleInputChange}
+        />
+        </FormGroup>
+        <FormGroup>
+        <Label for="lastName">Last Name</Label>
+        <Input
+          type="lastName"
+          placeholder="lastName"
+          name="lastName"
+          value={this.state.lastName}
+          onChange={this.handleInputChange}
+        />
+        </FormGroup>
+        <Button onClick={this.handleFormSubmit}>Register</Button>
+      </Form>
+      </Container>
+      );
 
     return this.state.isRegistered ? homePage : registrationForm 
   }
