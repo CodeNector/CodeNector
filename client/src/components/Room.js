@@ -5,10 +5,13 @@ import * as actions from '../actions/challengesActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import io from 'socket.io-client';
-// import { Container } from 'reactstrap';
+import { Button } from 'reactstrap';
 
 import 'brace/mode/javascript';
 import 'brace/theme/solarized_dark';
+import safeEval from 'notevil';
+
+
 
 const socket = io();
 
@@ -20,6 +23,12 @@ class Room extends Component {
 			this.updateCodeFromSockets(payload);
 		});
 		
+	}
+
+	evalCode() {
+		// Quick Maffs 
+		var result = safeEval(this.state.code)
+		console.log(result);
 	}
 
 	componentDidMount() {
@@ -62,7 +71,7 @@ class Room extends Component {
 	render() {
 		return (
 			<div className="container">
-				{console.log(this.props.challenge)}
+				{/* {console.log(this.props.challenge)} */}
 				<h1>{this.props.challenge.title}</h1>
 				<p>{this.props.challenge.description}</p>
 
@@ -72,6 +81,7 @@ class Room extends Component {
 					mode="javascript"
 					theme="solarized_dark"
 				/>
+				<Button onClick={this.evalCode.bind(this)}>Execute</Button>
 			</div>
 		);
 	}
