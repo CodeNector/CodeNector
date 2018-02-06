@@ -25,10 +25,15 @@ class Room extends Component {
 		
 	}
 
-	evalCode() {
+	evalCode = () => {
 		// Quick Maffs 
-		var result = safeEval(this.state.code)
-		console.log(result);
+		try {
+			const result = safeEval(this.state.code);
+			console.log(result);
+		} catch (e) {
+			console.log(e instanceof ReferenceError);
+		}
+
 	}
 
 	componentDidMount() {
@@ -56,7 +61,7 @@ class Room extends Component {
 		});
 	}
 
-	updateCodeInState(newText) {
+	updateCodeInState = (newText) => {
 		this.setState({ code: newText });
 		socket.emit('coding event', {
 			room: this.props.challenge.id,
@@ -77,11 +82,11 @@ class Room extends Component {
 
 				<AceEditor 
 					value={this.state.code}
-					onChange={this.updateCodeInState.bind(this)}
+					onChange={this.updateCodeInState}
 					mode="javascript"
 					theme="solarized_dark"
 				/>
-				<Button onClick={this.evalCode.bind(this)}>Execute</Button>
+				<Button onClick={this.evalCode}>Execute</Button>
 			</div>
 		);
 	}
