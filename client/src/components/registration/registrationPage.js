@@ -38,6 +38,7 @@ class Register extends Component {
       this.setState({
         isRegistered: true
       })
+      // add post to also login the user as well. 
     }
 
     loopThroughTheErrors = (errors) => {
