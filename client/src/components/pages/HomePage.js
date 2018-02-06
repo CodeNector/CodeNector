@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import * as challengesActions from '../../actions/challengesActions';
 import * as userActions from '../../actions/userActions';
 import ChallengesList from '../ChallengesList';
+import Nav from '../NavBar/nav'
+
 import ChooseUserName from '../ChooseUserName';
 // import { Container } from 'reactstrap';
 

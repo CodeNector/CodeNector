@@ -10,6 +10,7 @@ import Nav from './components/Nav';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import Login from './components/login/login'
+import Logout from './components/logout/logout'
 import Register from './components/registration/registrationPage'
 
 const store = configureStore();
@@ -31,4 +32,3 @@ render(
 	</Provider>,
 	document.getElementById('root')
 );
-// - danny - I added the register and login routes here... seems to link and route correctly. 

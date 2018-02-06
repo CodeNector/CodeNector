@@ -30,8 +30,11 @@ router.post('/register', function(req, res) {
 	req.checkBody('lastName', 'Last Name is required').notEmpty();
 	var errors = req.validationErrors();
 	if(errors){
-		console.log('There was a validation error');
-		// respond with the errors object? - not working 
+	  console.log('There was a validation error');
+	  // respond with the errors object? - not working 
+	  // need to bundle the errors into one bigger object. 
+	  console.log("errors:" + errors);
+	  res.json(errors);
 	} else{
 		console.log("no errors");
 		var newUser = new User({
@@ -48,14 +51,13 @@ router.post('/register', function(req, res) {
 
 		req.flash('success_msg', 'You are registered and can now login');
 		//need to redirect here. 
-		res.redirect('/');
-		}
+		res.json({registrationSuccess: true});
+	  }
 });
 
 // this is the passport local strategy. 
 passport.use(new LocalStrategy(
 	function(username, password, done) {
-		console.log("local startegy is starting");
 		User.getUserByUsername(username, function(err, user){
 		if(err) throw err;
 		//check to see if its not a user 
@@ -91,20 +93,43 @@ passport.deserializeUser(function(id, done) {
 	});
 });
 
-router.post('/login', 
-	passport.authenticate('local', {successRedirect: '/', faliureRedirect:'/login', failureFlash: true}),function(req, res) {
+router.post('/login', passport.authenticate('local'),function(req, res) {
 		// If this function gets called, authentication was successful.
-	// `req.user` contains the authenticated user.
+		// `req.user` contains the authenticated user.
 
 	console.log(req.body);
-	res.send("login was hit.")
+	res.json({
+		user: req.user,
+		isLoginSuccessful: true
+	})
 	//this is supposed to redirect user to users/username - 
-		console.log("login hit this part.")
+	console.log("login hit this part.")
+});
+
+router.get('/logout', function(req, res){
+	// code to handle logout. 
+	req.logout();
+
+	req.flash('success_msg', 'You are logged out.');
+	res.send(console.log("logged out"));
+
 });
 
 // If no API routes are hit, send the React app
 router.use(function (req, res) {
+	console.log("user is logged in: " + ensureAuthenticated);
 	res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
+
+// this function is supposed to see if the user is logged in or not. 
+function ensureAuthenticated(req, res, next){
+	if(req.isAuthenticated()){
+
+		return next();
+	} else {
+		console.log("not logged in");
+		res.json({loggedin: false});
+	}
+}
 
 module.exports = router;

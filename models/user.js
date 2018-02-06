@@ -12,7 +12,9 @@ var UserSchema = mongoose.Schema({
 
 var User = module.exports = mongoose.model('User', UserSchema); 
 
-// - Danny 
+
+
+// - Danny - i think this belongs in a controllers folder. 
 // this is going to encrypt the password cause we dont want to store it in plain text
 module.exports.createUser = function (newUser, callback){
     bcrpyt.genSalt(10, function(err, salt){
