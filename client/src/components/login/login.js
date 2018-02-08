@@ -11,7 +11,9 @@ class Login extends Component {
     state = {
         username: "",
         password: "",
-        isLoginSuccessful: false
+        areFieldsPopulated: false,
+        isLoginSuccessful: false,
+        isCredentialsWrong: false
     };
     
     // handle any changes to the input fields
@@ -28,28 +30,50 @@ class Login extends Component {
     // here we need to send the username and password to the server.. so that passport can ddo stuff with that. 
     handleFormSubmit = event => {
         event.preventDefault();
-        //make post rquest here to /login
-        API.submitLogin({
-          //put value from fields here. 
-          username: this.state.username,
-          password: this.state.password,
-        })
-        .then(res => {
-          console.log("response from server at login.");
-          // TODO add code to redirect 
-          console.log(res.user)
-          this.props.onSuccessfulLogin(res.user);
-        })
-        .catch(err => console.log(err));
+        this.setState({
+          areFieldsPopulated: false,
+          isCredentialsWrong: false
+        });
 
+        //the fields are not populated then we need to show an error message.  
+        if(!this.state.username || !this.state.password){
+          this.setState({
+            areFieldsPopulated: true
+          })
+          console.log("missing fields");
+        } else {
+
+          API.submitLogin({
+            //put value from fields here. 
+            username: this.state.username,
+            password: this.state.password,
+          })
+          .then(res => {
+            console.log("response from server at login.");
+            // TODO add code to redirect 
+            console.log(res)
+  
+            // other stuff to make login true. 
+            if(res && res.isLoginSuccessful){
+              this.props.onSuccessfulLogin(res.user);
+            } else {
+              this.setState({
+                isCredentialsWrong: true
+              });
+            }
+            
+          })
+          .catch(err => console.log(err));
+        }
   };
 
   render() {
-    console.log(this.props); 
     const homePage = (<HomePage />);
     const loginForm = (
       <Container>
         <Form>
+        {this.state.areFieldsPopulated ? <div className="errorMsg"> Please enter a user name and password </div>  :  null}
+        {this.state.isCredentialsWrong ? <div className="errorMsg"> Login unsuccessful. Please verify that username and paswword are correct.  </div>  :  null}
           <FormGroup>
           <Label for="username">Username</Label>
           <Input
@@ -77,7 +101,7 @@ class Login extends Component {
       </Container>
       );
 
-      return this.state.isLoggedIn ? homePage : loginForm 
+      return this.state.isLoginSuccessful ? homePage : loginForm 
   }
 }
 
