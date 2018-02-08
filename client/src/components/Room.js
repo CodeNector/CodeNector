@@ -24,13 +24,20 @@ class Room extends Component {
 			this.updateCodeFromSockets(payload);
 		});
 		
+		socket.on('receive result', result => {
+			// this.updateResultFromSockets(result);
+			console.log("receive result")
+			
+		});
+		
 	} 
 
 	evalCode = () => {
 		// Quick Maffs 
 		try {
 			const result = safeEval(this.state.code);
-			this.setState({result: result});
+			// this.setState({result: result});
+			this.updateResultInState(result);
 			console.log(result);
 		} catch (e) {
 			console.log(e instanceof ReferenceError, "Not valid JavaScript");
@@ -70,6 +77,7 @@ class Room extends Component {
 	}
 
 	updateCodeInState = (newText) => {
+		console.log(newText);
 		this.setState({ code: newText });
 		socket.emit('coding event', {
 			room: this.props.challenge.id,
@@ -77,8 +85,21 @@ class Room extends Component {
 		});
 	}
 
+	updateResultInState = (newResult) => {
+		console.log(newResult)
+		this.setState({ result: newResult });
+		socket.emit('code execution', {
+			result: newResult
+		});
+	}
+
 	updateCodeFromSockets(payload) {
 		this.setState({ code: payload.newCode });
+	}
+	
+	updateResultFromSockets(payload){
+		console.log(payload, 'line 101');
+		this.setState({ result: payload.newResult });
 	}
 
 	render() {
@@ -100,7 +121,7 @@ class Room extends Component {
 				<Button onClick={this.evalCode}>Execute</Button>
 				{/* {this.state.result} */
 				<Result
-					result={this.state.result}
+					value={this.state.result}
 				/>
 			}
 			</div>

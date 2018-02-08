@@ -99,6 +99,13 @@ io.on('connection', socket => {
 		socket.broadcast.to(data.room).emit('receive code', data);
 	});
 
+	socket.on('code execution', function(data) {
+		console.log("Code Execution!", data);
+		socket.broadcast.to(data.room).emit('receive result', {data});
+	});
+
+
+
 });
 
 
