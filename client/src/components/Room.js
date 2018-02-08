@@ -5,21 +5,43 @@ import * as actions from '../actions/challengesActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import io from 'socket.io-client';
-// import { Container } from 'reactstrap';
-
+import { Button } from 'reactstrap';
+import Result from './Result';
 import 'brace/mode/javascript';
 import 'brace/theme/solarized_dark';
+import safeEval from 'notevil';
 
 const socket = io();
 
 class Room extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {code: ''};
+		this.state = {
+			code: '',
+			result: ''
+		};
 		socket.on('receive code', payload => {
 			this.updateCodeFromSockets(payload);
 		});
 		
+	} 
+
+	evalCode = () => {
+		// Quick Maffs 
+		try {
+			const result = safeEval(this.state.code);
+			this.setState({result: result});
+			console.log(result);
+		} catch (e) {
+			console.log(e instanceof ReferenceError, "Not valid JavaScript");
+		}
+
+	}
+
+	renderResult = () => {
+		if(this.state.result !== '') {
+			return <h1>this.state.result</h1>;
+		}
 	}
 
 	componentDidMount() {
@@ -47,7 +69,7 @@ class Room extends Component {
 		});
 	}
 
-	updateCodeInState(newText) {
+	updateCodeInState = (newText) => {
 		this.setState({ code: newText });
 		socket.emit('coding event', {
 			room: this.props.challenge.id,
@@ -62,16 +84,25 @@ class Room extends Component {
 	render() {
 		return (
 			<div className="container">
-				{console.log(this.props.challenge)}
+				{/* {console.log(this.props.challenge)} */}
 				<h1>{this.props.challenge.title}</h1>
 				<p>{this.props.challenge.description}</p>
 
 				<AceEditor 
 					value={this.state.code}
-					onChange={this.updateCodeInState.bind(this)}
+					onChange={this.updateCodeInState}
 					mode="javascript"
 					theme="solarized_dark"
+					// width="800px"
+					// height="800px"
+					fontSize="14px"
 				/>
+				<Button onClick={this.evalCode}>Execute</Button>
+				{/* {this.state.result} */
+				<Result
+					result={this.state.result}
+				/>
+			}
 			</div>
 		);
 	}
