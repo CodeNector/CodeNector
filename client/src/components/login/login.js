@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import HomePage from '../pages/HomePage';
 import API from "../utils/API";
 import { Button, Form, FormGroup, Label, Input, FormText, Container} from 'reactstrap';
-import {loginUser} from "../../actions/userActions";
+import { loginUser } from "../../actions/userActions";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 

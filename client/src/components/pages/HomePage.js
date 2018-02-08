@@ -29,23 +29,18 @@ class HomePage extends Component {
 			<div className="container">
 				
 					<ChooseUserName userName={this.props.userName} chooseUserName={this.chooseUserName.bind(this)} />
-					<ChallengesList challenges={this.props.challenges} />
-{/* 
-					<p>
-						<Link to='/login'> Login </Link>
-					</p>
-					<p>
-						<Link to='/register'> Need an account? </Link>
-					</p>
-			 */}
+					<ChallengesList challenges={this.props.challenges} /> 
+
+					<Link className='nav-link'to='/userprofile'>go to profile</Link>
+
 			</div>
 		);
 	}
 }
 
 const mapStateToProps = state => {
-	console.log(state.currentUser);
-	return { challenges: state.challenges, userName: state.currentUser};
+	console.log(state);
+	return { challenges: state.challenges, user: state.user};
 };
 
 const mapDispatchToProps = dispatch => {

@@ -1,4 +1,3 @@
-import faker from 'faker';
 
 const initialState = {
 	challenges: [],
