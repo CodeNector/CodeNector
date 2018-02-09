@@ -117,7 +117,6 @@ class Room extends Component {
 					value={this.state.result}
 					onChange={this.updateResultInState}
 				/>
-			}
 			</div>
 		);
 	}
