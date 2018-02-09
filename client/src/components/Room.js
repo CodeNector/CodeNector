@@ -24,14 +24,19 @@ class Room extends Component {
 			this.updateCodeFromSockets(payload);
 		});
 		
+		socket.on('receive result', result => {
+			this.updateResultFromSockets(result);
+			console.log(result,"receive result")
+		});
+
+		
 	} 
 
 	evalCode = () => {
 		// Quick Maffs 
 		try {
 			const result = safeEval(this.state.code);
-			this.setState({result: result});
-			console.log(result);
+			this.updateResultInState(result);
 		} catch (e) {
 			console.log(e instanceof ReferenceError, "Not valid JavaScript");
 		}
@@ -48,9 +53,7 @@ class Room extends Component {
 		if(this.props.challenge.id == undefined) {
 			this.props.actions.getChallenges();
 		} else {
-			// const user = this.props.currentUser;
 			socket.emit('room', {room: this.props.challenge.id});
-			// this.setState({users: users});
 		}
 
 	}
@@ -59,7 +62,7 @@ class Room extends Component {
 		socket.emit('room', {room: nextProps.challenge.id});
 		const user = nextProps.currentUser;
 		const users = [...this.state.users, user ];
-
+		
 		this.setState({users: users});
 	}
 
@@ -70,6 +73,7 @@ class Room extends Component {
 	}
 
 	updateCodeInState = (newText) => {
+		console.log(newText);
 		this.setState({ code: newText });
 		socket.emit('coding event', {
 			room: this.props.challenge.id,
@@ -77,14 +81,25 @@ class Room extends Component {
 		});
 	}
 
+	updateResultInState = (newResult) => {
+		console.log(newResult)
+		this.setState({ result: newResult });
+		socket.emit('code execution', {
+			result: newResult
+		});
+	}
+
 	updateCodeFromSockets(payload) {
 		this.setState({ code: payload.newCode });
+	}
+	
+	updateResultFromSockets(payload){
+		this.setState({ result: payload.result });
 	}
 
 	render() {
 		return (
 			<div className="container">
-				{/* {console.log(this.props.challenge)} */}
 				<h1>{this.props.challenge.title}</h1>
 				<p>{this.props.challenge.description}</p>
 
@@ -98,9 +113,9 @@ class Room extends Component {
 					fontSize="14px"
 				/>
 				<Button onClick={this.evalCode}>Execute</Button>
-				{/* {this.state.result} */
 				<Result
-					result={this.state.result}
+					value={this.state.result}
+					onChange={this.updateResultInState}
 				/>
 			}
 			</div>

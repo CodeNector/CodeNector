@@ -11,7 +11,7 @@ const ResultCard = props => {
 		<div>
 			<Card style={ResultStyle}>
 				<CardTitle>
-					<span>Output: </span>{props.result}
+					<span>Output: </span>{props.value}
 				</CardTitle>
 			</Card>
 		</div>
