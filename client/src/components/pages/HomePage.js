@@ -28,11 +28,11 @@ class HomePage extends Component {
 			<div className="container">
 				{/* <ChooseUserName userName={this.props.userName} chooseUserName={this.chooseUserName.bind(this)} /> */}
 				<ChallengesList challenges={this.props.challenges} />
-				
-// 					<ChooseUserName userName={this.props.userName} chooseUserName={this.chooseUserName.bind(this)} />
-// 					<ChallengesList challenges={this.props.challenges} /> 
+{/* 				
+					<ChooseUserName userName={this.props.userName} chooseUserName={this.chooseUserName.bind(this)} />
+					<ChallengesList challenges={this.props.challenges} /> 
 
-// 					<Link className='nav-link'to='/userprofile'>go to profile</Link>
+ 					<Link className='nav-link'to='/userprofile'>go to profile</Link> */}
 
 
 			</div>
