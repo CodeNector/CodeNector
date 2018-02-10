@@ -56,7 +56,7 @@ class Login extends Component {
             // other stuff to make login true. 
             if(res && res.isLoginSuccessful){
               console.log("successful login form login page.")
-              this.props.onSuccessfulLogin(res.user);
+              this.props.onSuccessfullLogin(res.user);
               this.setState({
                 isLoginSuccessful: true
               })
@@ -115,7 +115,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => {
-	return {onSuccessfulLogin: (user) => {
+	return {onSuccessfullLogin: (user) => {
     dispatch(loginUser(user))
   }}
 };

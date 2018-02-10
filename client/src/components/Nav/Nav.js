@@ -11,6 +11,7 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import "./Nav.css"
+import { logoutUser } from "../../actions/userActions";
 
 class navbarInstance extends React.Component {
 	constructor(props) {
@@ -32,7 +33,9 @@ class navbarInstance extends React.Component {
 	}
 
 	logout() {
-		console.log("we are lgging out here.")
+		console.log("we are logging out here." + this);
+		// remove the user form the username 
+		this.props.onSuccessfullLogOut();
 	}
 
 
@@ -67,7 +70,7 @@ class navbarInstance extends React.Component {
 					<Collapse isOpen={this.state.isOpen} navbar>
 						<Nav className='ml-auto' navbar>
 							<NavItem>
-								<a className='nav-link' onClick={this.logout()} >Logout</a>
+								<a className='nav-link' onClick={this.logout} >Logout</a>
 							</NavItem>
 						</Nav>
 					</Collapse>
@@ -85,7 +88,10 @@ const mapStateToProps = (state, ownProps) => {
 	
   };
   
-const mapDispatchToProps = () => {
+const mapDispatchToProps = dispatch => {
+	return {onSuccessfullLogOut: () => {
+		dispatch(logoutUser())
+	  }}
   };
   
 export default connect(mapStateToProps, mapDispatchToProps)(navbarInstance);

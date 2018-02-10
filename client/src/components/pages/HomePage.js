@@ -39,7 +39,6 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = state => {
-	console.log(state);
 	return { challenges: state.challenges, user: state.user};
 };
 
