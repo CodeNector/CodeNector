@@ -10,6 +10,7 @@ import {
 	Container
 } from 'reactstrap';
 import { connect } from 'react-redux';
+import "./Nav.css"
 
 class navbarInstance extends React.Component {
 	constructor(props) {
@@ -24,25 +25,17 @@ class navbarInstance extends React.Component {
 		};
 	}
 
-	// componentWillMount = () => {
-	// 	// check if the state has a user in it.. if it does he is logged in. 
-	// 	console.log(this.props.user.username);
-	// 	console.log("Thi is the logged in state. " + this.state.isLoggedin);
-	// 	if(this.props.user.username){
-	// 		console.log("there is a user and we are changing the state. ")
-	// 		this.setState({
-	// 			isLoggedin: true
-	// 		})	
-	// 	} 
-
-	// 	console.log("Thi is the logged in state after the setstate. " + this.state.isLoggedin);
-	// }
-
 	toggle() {
 		this.setState({
 			isOpen: !this.state.isOpen
 		});
 	}
+
+	logout() {
+		console.log("we are lgging out here.")
+	}
+
+
 	render() {
 		const NavbarNotLoggedin = (
 			<div>
@@ -74,7 +67,7 @@ class navbarInstance extends React.Component {
 					<Collapse isOpen={this.state.isOpen} navbar>
 						<Nav className='ml-auto' navbar>
 							<NavItem>
-								<Link className='nav-link'to='/logout'>Logout</Link>
+								<a className='nav-link' onClick={this.logout()} >Logout</a>
 							</NavItem>
 						</Nav>
 					</Collapse>

@@ -3,7 +3,7 @@ import initialState from './initialState';
 export default function currentUserReducer(state=initialState, action) {
 	switch(action.type) {
 	case 'LOGIN':
-	console.log("PAYLOAD: ", action.payload);
+	console.log("PAYLOAD from reducer: ", action.payload);
 		sessionStorage.setItem('user', JSON.stringify(action.payload));
 		state.user = action.payload;
 		break;
