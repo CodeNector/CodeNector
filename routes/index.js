@@ -62,6 +62,7 @@ passport.use(new LocalStrategy(
 		if(err) throw err;
 		//check to see if its not a user 
 		if(!user){
+			console.log("no user found"); 
 			return done(null, false, {message: 'Unknown User.'});
 		}
 
@@ -93,19 +94,24 @@ passport.deserializeUser(function(id, done) {
 	});
 });
 
-router.post('/login', passport.authenticate('local'),function(req, res) {
+router.post('/login', passport.authenticate('local'), function(req, res) {
 		// If this function gets called, authentication was successful.
 		// `req.user` contains the authenticated user.
 
-	console.log(req.body);
 	res.json({
-		user: req.user,
+		user: {
+			id: req.user._id,
+			username: req.user.username,
+			firstName:req.user.firstName,
+			lastName:req.user.lastName
+		},
 		isLoginSuccessful: true
 	})
 	//this is supposed to redirect user to users/username - 
 	console.log("login hit this part.")
 });
 
+// logout - might not need this. 
 router.get('/logout', function(req, res){
 	// code to handle logout. 
 	req.logout();
