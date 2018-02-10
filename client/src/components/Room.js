@@ -112,7 +112,7 @@ class Room extends Component {
 					// height="800px"
 					fontSize="14px"
 				/>
-				<Button onClick={this.evalCode}>Execute</Button>
+				<Button onClick={this.evalCode}>Run Code</Button>
 				<Result
 					value={this.state.result}
 					onChange={this.updateResultInState}

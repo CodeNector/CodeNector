@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as challengesActions from '../../actions/challengesActions';
@@ -7,7 +6,7 @@ import * as userActions from '../../actions/userActions';
 import ChallengesList from '../ChallengesList';
 import Nav from '../NavBar/nav'
 
-import ChooseUserName from '../ChooseUserName';
+// import ChooseUserName from '../ChooseUserName';
 // import { Container } from 'reactstrap';
 
 // - danny - Added the link to link the login and register pages. 
@@ -20,15 +19,15 @@ class HomePage extends Component {
 		}
 	}
 
-	chooseUserName(userName) {
-		this.props.actions.assignUserName(userName);
-	}
+	// chooseUserName(userName) {
+	// 	this.props.actions.assignUserName(userName);
+	// }
 
 	render() {
 		return (
 			<div className="container">
 				
-					<ChooseUserName userName={this.props.userName} chooseUserName={this.chooseUserName.bind(this)} />
+					{/* <ChooseUserName userName={this.props.userName} chooseUserName={this.chooseUserName.bind(this)} /> */}
 					<ChallengesList challenges={this.props.challenges} />
 {/* 
 					<p>
@@ -44,8 +43,10 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = state => {
-	console.log(state.currentUser);
-	return { challenges: state.challenges, userName: state.currentUser};
+	// console.log(state.currentUser`);
+	// return { challenges: state.challenges, userName: state.currentUser};
+	return { challenges: state.challenges };
+	
 };
 
 const mapDispatchToProps = dispatch => {
