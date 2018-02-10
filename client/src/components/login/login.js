@@ -31,14 +31,14 @@ class Login extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         this.setState({
-          areFieldsPopulated: false,
+          areFieldsNotPopulated: false,
           isCredentialsWrong: false
         });
 
         //the fields are not populated then we need to show an error message.  
         if(!this.state.username || !this.state.password){
           this.setState({
-            areFieldsPopulated: true
+            areFieldsNotPopulated: true
           })
           console.log("missing fields");
         } else {
@@ -55,7 +55,11 @@ class Login extends Component {
   
             // other stuff to make login true. 
             if(res && res.isLoginSuccessful){
+              console.log("successful login form login page.")
               this.props.onSuccessfulLogin(res.user);
+              this.setState({
+                isLoginSuccessful: true
+              })
             } else {
               this.setState({
                 isCredentialsWrong: true
@@ -72,7 +76,7 @@ class Login extends Component {
     const loginForm = (
       <Container>
         <Form>
-        {this.state.areFieldsPopulated ? <div className="errorMsg"> Please enter a user name and password </div>  :  null}
+        {this.state.areFieldsNotPopulated ? <div className="errorMsg"> Please enter a user name and password </div>  :  null}
         {this.state.isCredentialsWrong ? <div className="errorMsg"> Login unsuccessful. Please verify that username and paswword are correct.  </div>  :  null}
           <FormGroup>
           <Label for="username">Username</Label>
@@ -109,8 +113,6 @@ const mapStateToProps = (state, ownProps) => {
   console.log("STATE FROM LOGIN : ", state)
   return {user: state.currentUser.user};
   
-  // so for other pages we want to map state props to users liek we are here ^ 
-  // then addd component will mpunt to the component - and in that function we will check for a user.. if user exists we are loggged in and we can show page - if not we will redirect to login page for now. 
 };
 
 const mapDispatchToProps = dispatch => {
