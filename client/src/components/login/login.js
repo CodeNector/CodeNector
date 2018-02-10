@@ -110,7 +110,6 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log("STATE FROM LOGIN : ", state)
   return {user: state.currentUser.user};
   
 };

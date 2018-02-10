@@ -36,20 +36,19 @@ router.post('/register', function(req, res) {
 	  console.log("errors:" + errors);
 	  res.json(errors);
 	} else{
-		console.log("no errors");
 		var newUser = new User({
 			username: username,
 			password: password,
 			firstName: firstName,
 			lastName: lastName
 		});
+
+		// need to look to see if the username exists already here.. use the controller function and see if it returns anything. 
 		
 		User.createUser(newUser, function(err, user){
 			if(err) throw err;
 			console.log(user);
 		});
-
-		req.flash('success_msg', 'You are registered and can now login');
 		//need to redirect here. 
 		res.json({registrationSuccess: true});
 	  }

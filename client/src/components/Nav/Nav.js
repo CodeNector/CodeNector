@@ -15,26 +15,28 @@ class navbarInstance extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			isLoggedin: false
-		}
-
 		this.toggle = this
 			.toggle
 			.bind(this);
 		this.state = {
-			isOpen: false
+			isOpen: false,
+			isLoggedin: false
 		};
 	}
 
-	componentWillMount = () => {
-		// check if the state has a user in it.. if it does he is logged in. 
-		if(!this.props.user.username){
-			this.setState({
-				isLoggedin: true
-			})	
-		} 
-	}
+	// componentWillMount = () => {
+	// 	// check if the state has a user in it.. if it does he is logged in. 
+	// 	console.log(this.props.user.username);
+	// 	console.log("Thi is the logged in state. " + this.state.isLoggedin);
+	// 	if(this.props.user.username){
+	// 		console.log("there is a user and we are changing the state. ")
+	// 		this.setState({
+	// 			isLoggedin: true
+	// 		})	
+	// 	} 
+
+	// 	console.log("Thi is the logged in state after the setstate. " + this.state.isLoggedin);
+	// }
 
 	toggle() {
 		this.setState({
@@ -81,7 +83,7 @@ class navbarInstance extends React.Component {
 			</div>
 		)
 
-		return this.isLoggedin ? NavbarLoggedin : NavbarNotLoggedin
+		return this.props.user.username ? NavbarLoggedin : NavbarNotLoggedin
 	}
 }
 
