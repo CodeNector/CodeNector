@@ -78,24 +78,32 @@ app.use(routes);
 
 
 io.on('connection', socket => {
-	console.log('a user connected');
+	console.log(socket.id, 'a user connected');
+
 
 	socket.on('disconnect', () => {
 		console.log('user disconnected');
 	});
 
-	socket.on('room', data => socket.join(data.room));
+	socket.join('room', data => {
+		let rooms = Object.keys(socket.rooms);
+		console.log(rooms);
+		io.to('room', ' a new user has joined the room');
+	});
 
 	socket.on('leave room', data => {
 		socket.leave(data.room);
 	});
 
 	socket.on('coding event', data => {
-		socket.broadcast.to(data.room).emit('receive code', data);
+		socket.broadcast.emit('receive code', data);
+	});
+
+	socket.on('code execution', function(data) {
+		socket.broadcast.emit('receive result', data);
 	});
 
 });
-
 
 server.listen(PORT, function() {
 	console.log(`🌎 ==> Server now on port ${PORT}!`);

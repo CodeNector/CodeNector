@@ -17,6 +17,7 @@ export default function configureStore(initialState) {
 		applyMiddleware(
 			ReduxPromise,
 			axiosMiddleware(client)
-		)
+		),
+		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 	);
 }
