@@ -13,7 +13,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
-const flash = require('connect-flash');
 const passport = require('passport');
 
 //connect to the db - Danny -
@@ -60,11 +59,7 @@ app.use(expressValidator({
 	}
 }));
 
-app.use(flash());
 app.use(function (req, res, next){
-	res.locals.success_msg = req.flash('success_msg');
-	res.locals.error_msg = req.flash('error_msg');
-	res.locals.error = req.flash('error');
 	//if user exists we will access it from anywhere if not we get null. 
 	res.locals.user = req.user || null; 
 	next();

@@ -124,7 +124,7 @@ class Register extends Component {
           value={this.state.username}
           onChange={this.handleInputChange}
         />
-        {this.state.usernameError ? <div id="errorMsg"> The username field is required </div>  :  null}
+        {this.state.usernameError ? <div className="errorMsg"> The username field is required </div>  :  null}
         </FormGroup>
         <FormGroup>
         <Label for="password">Password</Label>
@@ -135,7 +135,7 @@ class Register extends Component {
           value={this.state.password}
           onChange={this.handleInputChange}
         />
-        {this.state.passwordError ? <div id="errorMsg"> The password field is required </div>  :  null}
+        {this.state.passwordError ? <div className="errorMsg"> The password field is required </div>  :  null}
         {/* <Label for="password">Password</Label> */}
         <Input
           type="password"
@@ -144,7 +144,7 @@ class Register extends Component {
           value={this.state.confirmpassword}
           onChange={this.handleInputChange}
         />
-        {this.state.passwordMatchError ? <div id="errorMsg"> The passwords must match. </div>  :  null}
+        {this.state.passwordMatchError ? <div className="errorMsg"> The passwords must match. </div>  :  null}
         </FormGroup>
         <FormGroup>
         <Label for="firstName">First Name</Label>
@@ -155,7 +155,7 @@ class Register extends Component {
           value={this.state.firstName}
           onChange={this.handleInputChange}
         />
-        {this.state.firstnameError ? <div id="errorMsg"> The first name field is required </div>  :  null}
+        {this.state.firstnameError ? <div className="errorMsg"> The first name field is required </div>  :  null}
         </FormGroup>
         <FormGroup>
         <Label for="lastName">Last Name</Label>
@@ -166,7 +166,7 @@ class Register extends Component {
           value={this.state.lastName}
           onChange={this.handleInputChange}
         />
-        {this.state.lastnameError ? <div id="errorMsg"> The last name field is required </div>  :  null}
+        {this.state.lastnameError ? <div className="errorMsg"> The last name field is required </div>  :  null}
         </FormGroup>
         <Button onClick={this.handleFormSubmit}>Register</Button>
       </Form>
