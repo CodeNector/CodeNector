@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as challengesActions from '../../actions/challengesActions';
 import * as userActions from '../../actions/userActions';
 import ChallengesList from '../ChallengesList';
-import Nav from '../NavBar/nav'
+import Nav from '../NavBar/nav';
 
 // import ChooseUserName from '../ChooseUserName';
 // import { Container } from 'reactstrap';
@@ -26,17 +26,8 @@ class HomePage extends Component {
 	render() {
 		return (
 			<div className="container">
-				
-					{/* <ChooseUserName userName={this.props.userName} chooseUserName={this.chooseUserName.bind(this)} /> */}
-					<ChallengesList challenges={this.props.challenges} />
-{/* 
-					<p>
-						<Link to='/login'> Login </Link>
-					</p>
-					<p>
-						<Link to='/register'> Need an account? </Link>
-					</p>
-			 */}
+				{/* <ChooseUserName userName={this.props.userName} chooseUserName={this.chooseUserName.bind(this)} /> */}
+				<ChallengesList challenges={this.props.challenges} />
 			</div>
 		);
 	}
