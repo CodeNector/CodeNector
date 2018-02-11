@@ -114,7 +114,7 @@ class Room extends Component {
 							theme="solarized_dark"
 							width="800px"
 							// height="800px"
-							fontSize="14px"
+							fontSize="16px"
 							defaultValue="//No es6, sorry. 💣"
 						/>
 					</Col>

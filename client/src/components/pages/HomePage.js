@@ -5,6 +5,7 @@ import * as challengesActions from '../../actions/challengesActions';
 import * as userActions from '../../actions/userActions';
 import ChallengesList from '../ChallengesList';
 import Nav from '../NavBar/nav';
+import Sidebar from '../Sidebar';
 
 // import ChooseUserName from '../ChooseUserName';
 // import { Container } from 'reactstrap';
