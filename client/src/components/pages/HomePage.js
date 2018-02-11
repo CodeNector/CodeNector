@@ -41,7 +41,9 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = state => {
-	return { challenges: state.challenges, user: state.user};
+	// console.log(state.currentUser`);
+	// return { challenges: state.challenges, userName: state.currentUser};
+	return { challenges: state.challenges };
 };
 
 const mapDispatchToProps = dispatch => {

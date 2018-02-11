@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import UserProfile from "../pages/userProfile"
 
+
 class Login extends Component {
     // Setting the initial values of this.state.username and this.state.password
     state = {
@@ -99,7 +100,7 @@ class Login extends Component {
             value={this.state.password}
             onChange={this.handleInputChange}
           />
-          <Button onClick={this.handleFormSubmit} href="/">Login</Button>
+          <Button onClick={this.handleFormSubmit}> Login </Button>
         </FormGroup>
           
         </Form>
