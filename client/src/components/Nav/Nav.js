@@ -70,7 +70,7 @@ class navbarInstance extends React.Component {
 					<Collapse isOpen={this.state.isOpen} navbar>
 						<Nav className='ml-auto' navbar>
 							<NavItem>
-								<a className='nav-link' onClick={this.logout} >Logout</a>
+								<a className='nav-link' onClick={this.logout.bind(this)} >Logout</a>
 							</NavItem>
 						</Nav>
 					</Collapse>
