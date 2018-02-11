@@ -5,8 +5,9 @@ import * as actions from '../actions/challengesActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import io from 'socket.io-client';
-import { Button } from 'reactstrap';
+import { Button, Row, Col, Container } from 'reactstrap';
 import Result from './Result';
+import Sidebar from './Sidebar';
 import 'brace/mode/javascript';
 import 'brace/theme/solarized_dark';
 import safeEval from 'notevil';
@@ -99,24 +100,38 @@ class Room extends Component {
 
 	render() {
 		return (
-			<div className="container">
-				<h1>{this.props.challenge.title}</h1>
-				<p>{this.props.challenge.description}</p>
+			<div>
+				{/* <Container fluid> */}
+				<Row>
+					<Col xs='9'>
+						<h1>{this.props.challenge.title}</h1>
+						<p>{this.props.challenge.description}</p>
 
-				<AceEditor 
-					value={this.state.code}
-					onChange={this.updateCodeInState}
-					mode="javascript"
-					theme="solarized_dark"
-					// width="800px"
-					// height="800px"
-					fontSize="14px"
-				/>
+						<AceEditor 
+							value={this.state.code}
+							onChange={this.updateCodeInState}
+							mode="javascript"
+							theme="solarized_dark"
+							width="800px"
+							// height="800px"
+							fontSize="14px"
+							defaultValue="//No es6, sorry. 💣"
+						/>
+					</Col>
+					<Col xs='3'>
+						<Sidebar />
+					</Col>
+				</Row>
+				{" "}
+				<Row>
 				<Button onClick={this.evalCode}>Run Code</Button>
+				</Row>
 				<Result
 					value={this.state.result}
 					onChange={this.updateResultInState}
 				/>
+
+				{/* </Container> */}
 			</div>
 		);
 	}

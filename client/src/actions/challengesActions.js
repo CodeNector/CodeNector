@@ -14,7 +14,7 @@ const challenges = fetch(`${"https://codenector.herokuapp.com"}/api/challenges`)
 // 		type: 'GET_CHALLENGES',
 // 		payload: {
 // 			request:{
-// 				url:'http://localhost:3001/api/challenges'
+// 				url:'/challenges'
 // 			}
 // 		}
 // 	};

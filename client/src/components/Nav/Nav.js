@@ -10,8 +10,13 @@ import {
 	Container
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import "./Nav.css"
+import './Nav.css';
 import { logoutUser } from "../../actions/userActions";
+
+const navbarStyle = {
+	backgroundColor: '#343F3E',
+	color: '#DCEDFF'
+};
 
 class navbarInstance extends React.Component {
 	constructor(props) {
@@ -41,7 +46,7 @@ class navbarInstance extends React.Component {
 	render() {
 		const NavbarNotLoggedin = (
 			<div>
-				<Navbar color='dark' dark expand='md'>
+				<Navbar expand='md' style={navbarStyle}>
 				<Container>
 					<NavbarBrand href='/'>CodeNector</NavbarBrand>
 					<NavbarToggler onClick={this.toggle}/>
@@ -62,7 +67,7 @@ class navbarInstance extends React.Component {
 		)
 		const NavbarLoggedin = (
 			<div>
-				<Navbar color='dark' dark expand='md'>
+				<Navbar expand='md' style={navbarStyle}>
 				<Container>
 					<NavbarBrand href='/'>CodeNector</NavbarBrand>
 					<NavbarToggler onClick={this.toggle}/>
@@ -85,12 +90,12 @@ class navbarInstance extends React.Component {
 const mapStateToProps = (state, ownProps) => {
 	return {user: state.currentUser.user};
 	
-  };
-  
+	};
+	
 const mapDispatchToProps = dispatch => {
 	return {onSuccessfullLogOut: () => {
 		dispatch(logoutUser())
-	  }}
-  };
-  
+		}}
+	};
+	
 export default connect(mapStateToProps, mapDispatchToProps)(navbarInstance);

@@ -1,3 +1,16 @@
 a:hover {
     cursor:pointer;
-   }
+    color: #92DCE5
+}
+
+a {
+    color: #DCEDFF
+}
+
+a:visited {
+    color: #DCEDFF 
+}
+
+a:active {
+    color: #DCEDFF
+}
