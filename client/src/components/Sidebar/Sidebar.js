@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Card} from 'reactstrap';
+import {Container, Card, CardTitle, CardText, CardBody} from 'reactstrap';
 
 const style = {
 	color: '#DCEDFF',
@@ -7,16 +7,23 @@ const style = {
 	height: '100vh'
 };
 
+const cardStyle = {
+	backgroundColor: '#505A5B'
+};
+
 const Menu = props => {
 	return (
 		<Container style={style}>
-			<div>
-				{props.title}
-			</div>
-			{" "}
-			<div>
-				{props.description}
-			</div>
+			<Card style={cardStyle}>
+				<CardBody>
+					<CardTitle>
+						{props.title}
+					</CardTitle>
+					<CardText>
+						{props.description}
+					</CardText>
+				</CardBody>
+			</Card>
 		</Container>
 	);
 };
