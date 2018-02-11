@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {Container, Card} from 'reactstrap';
 
 const style = {
 	color: '#DCEDFF',
@@ -6,14 +7,18 @@ const style = {
 	height: '100vh'
 };
 
-class Menu extends Component {
-	render() {
-		return (
-			<div style={style}>
-			blach
+const Menu = props => {
+	return (
+		<Container style={style}>
+			<div>
+				{props.title}
 			</div>
-		);
-	}
-}
+			{" "}
+			<div>
+				{props.description}
+			</div>
+		</Container>
+	);
+};
 
 export default Menu;

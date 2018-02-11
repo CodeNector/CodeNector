@@ -104,9 +104,6 @@ class Room extends Component {
 				{/* <Container fluid> */}
 				<Row>
 					<Col xs='9'>
-						<h1>{this.props.challenge.title}</h1>
-						<p>{this.props.challenge.description}</p>
-
 						<AceEditor 
 							value={this.state.code}
 							onChange={this.updateCodeInState}
@@ -119,7 +116,11 @@ class Room extends Component {
 						/>
 					</Col>
 					<Col xs='3'>
-						<Sidebar />
+						<Sidebar
+							title={this.props.challenge.title}
+							description={this.props.challenge.description}
+
+						/>
 					</Col>
 				</Row>
 				{" "}
