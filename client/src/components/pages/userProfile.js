@@ -13,11 +13,11 @@ class userProfile extends Component {
 
 	}
 
-	componentWillMount = state => {
+	componentWillMount = () => {
 		// check if the state has a user in it.. if it does he is logged in. 
 		if(!this.props.user.username){
 			//redirect 
-			console.log("there is a user logged in. ");
+			console.log("there is no user logged in. ");
 			this.props.history.push("/");
 			
 		} 

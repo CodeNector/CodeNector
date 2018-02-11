@@ -9,8 +9,11 @@ import {
 	NavItem, 
 	Container
 } from 'reactstrap';
+import { connect } from 'react-redux';
+import "./Nav.css"
+import { logoutUser } from "../../actions/userActions";
 
-export default class navbarInstance extends React.Component {
+class navbarInstance extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -18,16 +21,25 @@ export default class navbarInstance extends React.Component {
 			.toggle
 			.bind(this);
 		this.state = {
-			isOpen: false
+			isOpen: false,
+			isLoggedin: false
 		};
 	}
+
 	toggle() {
 		this.setState({
 			isOpen: !this.state.isOpen
 		});
 	}
+
+	logout() {
+		// remove the user form the username 
+		this.props.onSuccessfullLogOut();
+	}
+
+
 	render() {
-		return (
+		const NavbarNotLoggedin = (
 			<div>
 				<Navbar color='dark' dark expand='md'>
 				<Container>
@@ -35,6 +47,7 @@ export default class navbarInstance extends React.Component {
 					<NavbarToggler onClick={this.toggle}/>
 					<Collapse isOpen={this.state.isOpen} navbar>
 						<Nav className='ml-auto' navbar>
+
 							<NavItem>
 								<Link className='nav-link'to='/login'>Login</Link>
 							</NavItem>
@@ -46,6 +59,38 @@ export default class navbarInstance extends React.Component {
 					</Container>
 				</Navbar>
 			</div>
-		);
+		)
+		const NavbarLoggedin = (
+			<div>
+				<Navbar color='dark' dark expand='md'>
+				<Container>
+					<NavbarBrand href='/'>CodeNector</NavbarBrand>
+					<NavbarToggler onClick={this.toggle}/>
+					<Collapse isOpen={this.state.isOpen} navbar>
+						<Nav className='ml-auto' navbar>
+							<NavItem>
+								<a className='nav-link' href="/" onClick={this.logout.bind(this)} >Logout</a>
+							</NavItem>
+						</Nav>
+					</Collapse>
+					</Container>
+				</Navbar>
+			</div>
+		)
+
+		return this.props.user.username ? NavbarLoggedin : NavbarNotLoggedin
 	}
 }
+
+const mapStateToProps = (state, ownProps) => {
+	return {user: state.currentUser.user};
+	
+  };
+  
+const mapDispatchToProps = dispatch => {
+	return {onSuccessfullLogOut: () => {
+		dispatch(logoutUser())
+	  }}
+  };
+  
+export default connect(mapStateToProps, mapDispatchToProps)(navbarInstance);

@@ -5,6 +5,8 @@ import { Button, Form, FormGroup, Label, Input, FormText, Container} from 'react
 import { loginUser } from "../../actions/userActions";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import UserProfile from "../pages/userProfile"
+
 
 class Login extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -31,14 +33,14 @@ class Login extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         this.setState({
-          areFieldsPopulated: false,
+          areFieldsNotPopulated: false,
           isCredentialsWrong: false
         });
 
         //the fields are not populated then we need to show an error message.  
         if(!this.state.username || !this.state.password){
           this.setState({
-            areFieldsPopulated: true
+            areFieldsNotPopulated: true
           })
           console.log("missing fields");
         } else {
@@ -55,7 +57,11 @@ class Login extends Component {
   
             // other stuff to make login true. 
             if(res && res.isLoginSuccessful){
-              this.props.onSuccessfulLogin(res.user);
+              console.log("successful login form login page.")
+              this.props.onSuccessfullLogin(res.user);
+              this.setState({
+                isLoginSuccessful: true
+              })
             } else {
               this.setState({
                 isCredentialsWrong: true
@@ -68,11 +74,11 @@ class Login extends Component {
   };
 
   render() {
-    const homePage = (<HomePage />);
+    const userProfile = (<UserProfile />);
     const loginForm = (
       <Container>
         <Form>
-        {this.state.areFieldsPopulated ? <div className="errorMsg"> Please enter a user name and password </div>  :  null}
+        {this.state.areFieldsNotPopulated ? <div className="errorMsg"> Please enter a user name and password </div>  :  null}
         {this.state.isCredentialsWrong ? <div className="errorMsg"> Login unsuccessful. Please verify that username and paswword are correct.  </div>  :  null}
           <FormGroup>
           <Label for="username">Username</Label>
@@ -94,27 +100,24 @@ class Login extends Component {
             value={this.state.password}
             onChange={this.handleInputChange}
           />
-          <Button onClick={this.handleFormSubmit}>Login</Button>
+          <Button onClick={this.handleFormSubmit}> Login </Button>
         </FormGroup>
           
         </Form>
       </Container>
       );
 
-      return this.state.isLoginSuccessful ? homePage : loginForm 
+      return this.state.isLoginSuccessful ? userProfile : loginForm 
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log("STATE FROM LOGIN : ", state)
   return {user: state.currentUser.user};
   
-  // so for other pages we want to map state props to users liek we are here ^ 
-  // then addd component will mpunt to the component - and in that function we will check for a user.. if user exists we are loggged in and we can show page - if not we will redirect to login page for now. 
 };
 
 const mapDispatchToProps = dispatch => {
-	return {onSuccessfulLogin: (user) => {
+	return {onSuccessfullLogin: (user) => {
     dispatch(loginUser(user))
   }}
 };
