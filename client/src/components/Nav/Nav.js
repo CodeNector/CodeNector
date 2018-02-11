@@ -33,7 +33,6 @@ class navbarInstance extends React.Component {
 	}
 
 	logout() {
-		console.log("we are logging out here." + this);
 		// remove the user form the username 
 		this.props.onSuccessfullLogOut();
 	}
@@ -70,7 +69,7 @@ class navbarInstance extends React.Component {
 					<Collapse isOpen={this.state.isOpen} navbar>
 						<Nav className='ml-auto' navbar>
 							<NavItem>
-								<a className='nav-link' onClick={this.logout.bind(this)} >Logout</a>
+								<a className='nav-link' href="/" onClick={this.logout.bind(this)} >Logout</a>
 							</NavItem>
 						</Nav>
 					</Collapse>
