@@ -5,6 +5,7 @@ import { Button, Form, FormGroup, Label, Input, FormText, Container} from 'react
 import { loginUser } from "../../actions/userActions";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import UserProfile from "../pages/userProfile"
 
 class Login extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -72,7 +73,7 @@ class Login extends Component {
   };
 
   render() {
-    const homePage = (<HomePage />);
+    const userProfile = (<UserProfile />);
     const loginForm = (
       <Container>
         <Form>
@@ -105,7 +106,7 @@ class Login extends Component {
       </Container>
       );
 
-      return this.state.isLoginSuccessful ? homePage : loginForm 
+      return this.state.isLoginSuccessful ? userProfile : loginForm 
   }
 }
 
