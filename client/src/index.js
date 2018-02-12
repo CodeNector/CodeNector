@@ -13,6 +13,7 @@ import Login from './components/login/login'
 import Logout from './components/logout/logout'
 import Register from './components/registration/registrationPage'
 import userProfile from './components/pages/userProfile';
+import './index.css'
 
 const store = configureStore();
 
