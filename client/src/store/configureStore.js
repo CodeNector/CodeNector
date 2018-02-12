@@ -1,8 +1,9 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from '../reducers';
 import ReduxPromise from 'redux-promise';
 import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
+import logger from 'redux-logger';
 
 const client = axios.create({
 	baseURL: 'http://localhost:3001/api',
@@ -10,14 +11,18 @@ const client = axios.create({
 	response: 'json'
 });
 
-export default function configureStore(initialState) {
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+export default function configureStore(preloadedState) {
 	return createStore(
 		rootReducer,
-		initialState,
-		applyMiddleware(
-			ReduxPromise,
-			axiosMiddleware(client)
-		),
-		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+		preloadedState,
+		composeEnhancers(
+			applyMiddleware(
+				logger,
+				ReduxPromise,
+				axiosMiddleware(client)
+			)
+		)
 	);
 }
