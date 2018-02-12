@@ -5,6 +5,7 @@ import * as userActions from '../../actions/userActions';
 import Nav from '../NavBar/nav';
 import { Row, Col } from "reactstrap"
 import "./newHomePage.css"
+import FA from 'react-fontawesome';
 
 // import ChooseUserName from '../ChooseUserName';
 // import { Container } from 'reactstrap';
@@ -20,10 +21,13 @@ class NewHomePage extends Component {
 
 	render() {
 		return (
-            <Row>
+            <Row id="bg">
                 <Col> 
                     <div className="bgimg">
-                        <div className="title"> CodeNector</div>
+                        <div id="bgOverlay">
+                            <h1 className="title text-center"><FA id="icon" name="terminal" /> CodeNector</h1>
+                            <h3 className="text-center">Pair Programming, From Anywhere</h3>
+                        </div>
                     </div>
                 </Col>
             </Row>

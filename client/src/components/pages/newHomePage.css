@@ -4,21 +4,11 @@
 }
 
 .title {
-    display: inline-block;
-    font-family: "Raleway", sans-serif;
-    text-align: center;
-    
-    font-size: 48px;
-    font-weight: bold;
-    
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #505a5b;
+    font-size: 6rem;
+    font-weight: 800;
     margin: auto;
-    
 }
 
 
@@ -26,6 +16,16 @@
     background-image: url('../../images/backgroundImage.jpg');
     background-position: center;
     background-size: cover;
-    height:50vw;
+    height: 100vh;
+    width: 100vw;
+}
+
+#icon{
+    color: #94b0da;
+}
+
+#bgOverlay{
+    background: rgba(148, 176, 218, 0.2);
+    height: 100vh;
     width: 100vw;
 }
