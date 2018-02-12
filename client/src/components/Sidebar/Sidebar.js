@@ -1,8 +1,8 @@
 import React from 'react';
-import {Container, Card, CardTitle, CardText, CardBody} from 'reactstrap';
+import { Container, Card, CardTitle, CardText, CardBody } from 'reactstrap';
 
 const style = {
-	color: '#DCEDFF',
+	color: '#DCEDFF', //Tertiary Color
 	backgroundColor: '#343F3E', //Primary Color
 	height: '100vh'
 };

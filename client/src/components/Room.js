@@ -14,6 +14,10 @@ import safeEval from 'notevil';
 
 const socket = io();
 
+const roomStyle={
+	backgroundColor: "#DCEDFF"
+}
+
 class Room extends Component {
 	constructor(props) {
 		super(props);
@@ -100,8 +104,7 @@ class Room extends Component {
 
 	render() {
 		return (
-			<div>
-				{/* <Container fluid> */}
+			<div style={roomStyle}>
 				<Row>
 					<Col xs='9'>
 						<AceEditor 
@@ -109,11 +112,14 @@ class Room extends Component {
 							onChange={this.updateCodeInState}
 							mode="javascript"
 							theme="solarized_dark"
-							width="800px"
+							width="76vw"
+							height="85vh"
 							// height="800px"
-							fontSize="16px"
+							fontSize="18px"
 							defaultValue="//No es6, sorry. 💣"
 						/>
+					<Button className="float-right" onClick={this.evalCode}>Run Code</Button>
+						
 					</Col>
 					<Col xs='3'>
 						<Sidebar
@@ -123,17 +129,8 @@ class Room extends Component {
 							onChange={this.updateResultInState}
 						/>
 					</Col>
+					
 				</Row>
-				{" "}
-				<Row>
-				<Button onClick={this.evalCode}>Run Code</Button>
-				</Row>
-				{/* <Result
-					value={this.state.result}
-					onChange={this.updateResultInState}
-				/> */}
-
-				{/* </Container> */}
 			</div>
 		);
 	}
