@@ -9,9 +9,10 @@ import {
 	NavItem, 
 	Container
 } from 'reactstrap';
+import FA from 'react-fontawesome';
 import { connect } from 'react-redux';
 import './Nav.css';
-import { logoutUser } from "../../actions/userActions";
+import { logoutUser } from '../../actions/userActions';
 
 const navbarStyle = {
 	backgroundColor: '#343F3E',
@@ -47,13 +48,14 @@ class navbarInstance extends React.Component {
 		const isLoggedIn = this.props.user.username;
 		return (
 			<Navbar expand='md' style={navbarStyle}>
-				<NavbarBrand href='/Home'>CodeNector</NavbarBrand>
+
+				<NavbarBrand href='/Home'><FA name='terminal'/>{' '}CodeNector</NavbarBrand>
 				<NavbarToggler onClick={this.toggle}/>
 				<Collapse isOpen={this.state.isOpen} navbar>
 					{isLoggedIn ? (
 						<Nav className='ml-auto' navbar>
 							<NavItem>
-								<a className='nav-link' href="/" onClick={this.logout.bind(this)} >Logout</a>
+								<a className='nav-link' href='/' onClick={this.logout.bind(this)} >Logout</a>
 							</NavItem>	
 						</Nav>
 					) : (
