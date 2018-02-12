@@ -4,7 +4,9 @@ import { Container, Card, CardTitle, CardText, CardBody } from 'reactstrap';
 const style = {
 	color: '#DCEDFF', //Tertiary Color
 	backgroundColor: '#343F3E', //Primary Color
-	height: '100vh'
+	height: '100vh',
+	fontFamily: `'Roboto Mono', monospace`,
+	fontSize: '0.75rem'
 };
 
 const cardStyle = {

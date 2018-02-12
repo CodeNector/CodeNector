@@ -14,6 +14,7 @@ import Logout from './components/logout/logout'
 import Register from './components/registration/registrationPage'
 import userProfile from './components/pages/userProfile';
 import NewHomePage from "./components/pages/NewHomePage"
+import './index.css'
 
 const store = configureStore();
 

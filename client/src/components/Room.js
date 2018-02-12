@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import io from 'socket.io-client';
 import { Button, Row, Col, Container } from 'reactstrap';
-// import Result from './Result';
+import FA from 'react-fontawesome'
 import Sidebar from './Sidebar';
 import 'brace/mode/javascript';
 import 'brace/theme/solarized_dark';
@@ -17,6 +17,11 @@ const socket = io();
 
 const roomStyle={
 	backgroundColor: "#DCEDFF"
+}
+
+const buttonStyle = {
+	backgroundColor: '#94B0DA',
+	color: '#343F3E'
 }
 
 class Room extends Component {
@@ -118,7 +123,7 @@ class Room extends Component {
 						fontSize="18px"
 						defaultValue="//No es6, sorry. 💣"
 					/>
-				<Button className="float-right" onClick={this.evalCode}>Run Code</Button>
+				<Button style={buttonStyle} className="float-right" onClick={this.evalCode}><FA name="play"/>{" "}Run Code</Button>
 					
 				</Col>
 				<Col xs='3'>
@@ -129,9 +134,9 @@ class Room extends Component {
 						onChange={this.updateResultInState}
 					/>
 				</Col>
-				
-			</Row>
-		</div>)
+		</Row>
+	</div>
+			)
 
 		const newHome = <NewHomePage/>
 
