@@ -5,6 +5,7 @@ import * as challengesActions from '../../actions/challengesActions';
 import * as userActions from '../../actions/userActions';
 import ChallengesList from '../ChallengesList';
 import Nav from '../NavBar/nav';
+import NewHomePage from "./NewHomePage"
 
 // import ChooseUserName from '../ChooseUserName';
 // import { Container } from 'reactstrap';
@@ -24,7 +25,7 @@ class HomePage extends Component {
 	// }
 
 	render() {
-		return (
+		const Home = (
 			<div className="container">
 				{/* <ChooseUserName userName={this.props.userName} chooseUserName={this.chooseUserName.bind(this)} /> */}
 				<ChallengesList challenges={this.props.challenges} />
@@ -34,16 +35,22 @@ class HomePage extends Component {
 
  					<Link className='nav-link'to='/userprofile'>go to profile</Link> */}
 
-
 			</div>
-		);
+		)
+
+		const newHome = <NewHomePage/>
+
+		return this.props.user.username ? Home : newHome;
 	}
 }
 
 const mapStateToProps = state => {
 	// console.log(state.currentUser`);
 	// return { challenges: state.challenges, userName: state.currentUser};
-	return { challenges: state.challenges };
+	return { 
+		challenges: state.challenges,
+		user: state.currentUser.user
+	 };
 };
 
 const mapDispatchToProps = dispatch => {

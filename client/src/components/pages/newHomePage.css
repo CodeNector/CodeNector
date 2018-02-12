@@ -1,0 +1,31 @@
+.underline{
+    margin:auto;
+    width:40%;
+}
+
+.title {
+    display: inline-block;
+    font-family: "Raleway", sans-serif;
+    text-align: center;
+    
+    font-size: 48px;
+    font-weight: bold;
+    
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+    
+}
+
+
+.bgimg {
+    background-image: url('../../images/backgroundImage.jpg');
+    background-position: center;
+    background-size: cover;
+    height:50vw;
+    width: 100vw;
+}

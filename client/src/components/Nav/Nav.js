@@ -43,7 +43,7 @@ class navbarInstance extends React.Component {
 			<div>
 				<Navbar color='dark' dark expand='md'>
 				<Container>
-					<NavbarBrand href='/'>CodeNector</NavbarBrand>
+					<NavbarBrand href='/Home'>CodeNector</NavbarBrand>
 					<NavbarToggler onClick={this.toggle}/>
 					<Collapse isOpen={this.state.isOpen} navbar>
 						<Nav className='ml-auto' navbar>
@@ -64,7 +64,7 @@ class navbarInstance extends React.Component {
 			<div>
 				<Navbar color='dark' dark expand='md'>
 				<Container>
-					<NavbarBrand href='/'>CodeNector</NavbarBrand>
+					<NavbarBrand href='/Home'>CodeNector</NavbarBrand>
 					<NavbarToggler onClick={this.toggle}/>
 					<Collapse isOpen={this.state.isOpen} navbar>
 						<Nav className='ml-auto' navbar>

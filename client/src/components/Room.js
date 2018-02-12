@@ -10,6 +10,7 @@ import Result from './Result';
 import 'brace/mode/javascript';
 import 'brace/theme/solarized_dark';
 import safeEval from 'notevil';
+import NewHomePage from "./pages/NewHomePage"
 
 const socket = io();
 
@@ -98,7 +99,7 @@ class Room extends Component {
 	}
 
 	render() {
-		return (
+		const room = (
 			<div className="container">
 				<h1>{this.props.challenge.title}</h1>
 				<p>{this.props.challenge.description}</p>
@@ -118,7 +119,10 @@ class Room extends Component {
 					onChange={this.updateResultInState}
 				/>
 			</div>
-		);
+		)
+		const newHome = <NewHomePage/>
+
+		return this.props.user.username ? room : newHome;
 	}
 }
 
@@ -127,9 +131,15 @@ const mapStateToProps = (state, ownProps) => {
 		const challenge = state.challenges.filter(challenge => {
 			return challenge.id == ownProps.match.params.id;
 		})[0];
-		return { challenge: challenge };
+		return { 
+			challenge: challenge,
+			user: state.currentUser.user 
+		};
 	} else {
-		return { challenge: {title: '', description: ''}};
+		return { 
+			challenge: {title: '', description: ''},
+			user: state.currentUser.user
+		};
 	}
 };
 
