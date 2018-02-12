@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import io from 'socket.io-client';
 import { Button, Row, Col, Container } from 'reactstrap';
-import Result from './Result';
+// import Result from './Result';
 import Sidebar from './Sidebar';
 import 'brace/mode/javascript';
 import 'brace/theme/solarized_dark';
@@ -119,7 +119,8 @@ class Room extends Component {
 						<Sidebar
 							title={this.props.challenge.title}
 							description={this.props.challenge.description}
-
+							value={this.state.result}
+							onChange={this.updateResultInState}
 						/>
 					</Col>
 				</Row>
@@ -127,10 +128,10 @@ class Room extends Component {
 				<Row>
 				<Button onClick={this.evalCode}>Run Code</Button>
 				</Row>
-				<Result
+				{/* <Result
 					value={this.state.result}
 					onChange={this.updateResultInState}
-				/>
+				/> */}
 
 				{/* </Container> */}
 			</div>
