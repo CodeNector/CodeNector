@@ -11,6 +11,7 @@ import Sidebar from './Sidebar';
 import 'brace/mode/javascript';
 import 'brace/theme/solarized_dark';
 import safeEval from 'notevil';
+import NewHomePage from "./pages/NewHomePage"
 
 const socket = io();
 
@@ -108,36 +109,38 @@ class Room extends Component {
 	}
 
 	render() {
-		return (
-			<div style={roomStyle}>
-				<Row>
-					<Col xs='9'>
-						<AceEditor 
-							value={this.state.code}
-							onChange={this.updateCodeInState}
-							mode="javascript"
-							theme="solarized_dark"
-							width="76vw"
-							height="85vh"
-							// height="800px"
-							fontSize="18px"
-							defaultValue="//No es6, sorry. 💣"
-						/>
-					<Button style={buttonStyle} className="float-right" onClick={this.evalCode}><FA name="play"/>{" "}Run Code</Button>
-						
-					</Col>
-					<Col xs='3'>
-						<Sidebar
-							title={this.props.challenge.title}
-							description={this.props.challenge.description}
-							value={this.state.result}
-							onChange={this.updateResultInState}
-						/>
-					</Col>
+		const room = (<div style={roomStyle}>
+			<Row>
+				<Col xs='9'>
+					<AceEditor 
+						value={this.state.code}
+						onChange={this.updateCodeInState}
+						mode="javascript"
+						theme="solarized_dark"
+						width="76vw"
+						height="85vh"
+						// height="800px"
+						fontSize="18px"
+						defaultValue="//No es6, sorry. 💣"
+					/>
+				<Button style={buttonStyle} className="float-right" onClick={this.evalCode}><FA name="play"/>{" "}Run Code</Button>
 					
-				</Row>
-			</div>
-		);
+				</Col>
+				<Col xs='3'>
+					<Sidebar
+						title={this.props.challenge.title}
+						description={this.props.challenge.description}
+						value={this.state.result}
+						onChange={this.updateResultInState}
+					/>
+				</Col>
+		</Row>
+	</div>
+			)
+
+		const newHome = <NewHomePage/>
+
+		return this.props.user.username ? room : newHome;
 	}
 }
 
@@ -146,9 +149,15 @@ const mapStateToProps = (state, ownProps) => {
 		const challenge = state.challenges.filter(challenge => {
 			return challenge.id == ownProps.match.params.id;
 		})[0];
-		return { challenge: challenge };
+		return { 
+			challenge: challenge,
+			user: state.currentUser.user 
+		};
 	} else {
-		return { challenge: {title: '', description: ''}};
+		return { 
+			challenge: {title: '', description: ''},
+			user: state.currentUser.user
+		};
 	}
 };
 

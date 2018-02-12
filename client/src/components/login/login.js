@@ -6,6 +6,7 @@ import { loginUser } from "../../actions/userActions";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import UserProfile from "../pages/userProfile"
+import Nav from "../Nav/Nav"
 
 
 class Login extends Component {
@@ -62,6 +63,7 @@ class Login extends Component {
               this.setState({
                 isLoginSuccessful: true
               })
+              Nav.forceUpdate();
             } else {
               this.setState({
                 isCredentialsWrong: true
@@ -74,7 +76,7 @@ class Login extends Component {
   };
 
   render() {
-    const userProfile = (<UserProfile />);
+    const homePage = (<HomePage />);
     const loginForm = (
       <Container>
         <Form>
@@ -100,14 +102,14 @@ class Login extends Component {
             value={this.state.password}
             onChange={this.handleInputChange}
           />
-          <Button onClick={this.handleFormSubmit}> Login </Button>
+          <Button href="/Home" onClick={this.handleFormSubmit}>Login</Button>
         </FormGroup>
           
         </Form>
       </Container>
       );
 
-      return this.state.isLoginSuccessful ? userProfile : loginForm 
+      return this.state.isLoginSuccessful ? homePage : loginForm 
   }
 }
 
@@ -117,9 +119,11 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => {
-	return {onSuccessfullLogin: (user) => {
-    dispatch(loginUser(user))
-  }}
+	return {
+    onSuccessfullLogin: (user) => {
+      dispatch(loginUser(user))
+    }
+  } 
 };
 
 

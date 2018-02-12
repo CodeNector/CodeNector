@@ -48,7 +48,8 @@ class navbarInstance extends React.Component {
 		const isLoggedIn = this.props.user.username;
 		return (
 			<Navbar expand='md' style={navbarStyle}>
-				<NavbarBrand href='/'><FA name='terminal'/>{' '}CodeNector</NavbarBrand>
+
+				<NavbarBrand href='/Home'><FA name='terminal'/>{' '}CodeNector</NavbarBrand>
 				<NavbarToggler onClick={this.toggle}/>
 				<Collapse isOpen={this.state.isOpen} navbar>
 					{isLoggedIn ? (
