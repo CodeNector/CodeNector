@@ -14,6 +14,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const passport = require('passport');
+require ('dotenv').config();
 
 //connect to the db - Danny -
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/CodeNector');
@@ -37,7 +38,7 @@ app.use(passport.session());
 
 //this is for important for login stuff
 app.use(require('express-session')({
-	secret: 'secret String here - be sure to make this hidden when we go live',
+	secret: process.env.SALT,
 	resave: false,
 	saveUninitialized: false
 }));
