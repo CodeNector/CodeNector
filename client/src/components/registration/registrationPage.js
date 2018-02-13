@@ -64,6 +64,7 @@ class Register extends Component {
         userExistsError: false
       });
       console.log(errors.userExists); 
+      //this will makee it so the error for unique users display. 
       if(errors.userExists){
         console.log("DOES USER EXISTS? " + this.state.userExistsError);
         this.setState({
