@@ -127,7 +127,7 @@ class Register extends Component {
       <Container>
         <Card style={cardStyle}>
           <CardBody>
-      <Form>
+      <Form onSubmit={this.handleFormSubmit}>
         <FormGroup>
         <Label for="username">Username</Label>
         <Input
@@ -188,7 +188,7 @@ class Register extends Component {
         />
         {this.state.lastnameError ? <div className="errorMsg"> The last name field is required </div>  :  null}
         </FormGroup>
-        <Button onClick={this.handleFormSubmit}><FA name="wpforms" />{' '}Register</Button>
+        <Button type="submit"><FA name="wpforms"/>{' '}Register</Button>
       </Form>
       </CardBody>
       </Card>

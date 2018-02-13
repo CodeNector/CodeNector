@@ -20,8 +20,8 @@ const roomStyle={
 }
 
 const buttonStyle = {
-	backgroundColor: '#94B0DA',
-	color: '#343F3E'
+	backgroundColor: '#505a5b',
+	color: '#dcedff'
 }
 
 class Room extends Component {
