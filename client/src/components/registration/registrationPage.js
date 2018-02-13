@@ -1,9 +1,20 @@
 import React, { Component } from "react";
 import HomePage from '../pages/HomePage';
 import API from "../utils/API"
-import { Button, Form, FormGroup, Label, Input, FormText, Container} from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, Container, Card, CardBody, Col, Row } from 'reactstrap';
 import "./registrationPage.css";
+import FA from 'react-fontawesome'
 
+const buttonStyle = {
+  marginTop: '5px',
+  backgroundColor: '#505a5b',
+}
+
+const cardStyle = {
+  marginTop: '5px',
+  // backgroundColor: '#8f91a2',
+  // width: '50vw'
+}
 
 class Register extends Component {
     // Setting the initial values of this.state.username and this.state.password
@@ -114,6 +125,8 @@ class Register extends Component {
     const homePage = (<HomePage />);
     const registrationForm = (
       <Container>
+        <Card style={cardStyle}>
+          <CardBody>
       <Form>
         <FormGroup>
         <Label for="username">Username</Label>
@@ -127,6 +140,8 @@ class Register extends Component {
         {this.state.usernameError ? <div className="errorMsg"> The username field is required </div>  :  null}
         </FormGroup>
         <FormGroup>
+        <Row>
+        <Col xs='6'>
         <Label for="password">Password</Label>
         <Input
           type="password"
@@ -136,7 +151,9 @@ class Register extends Component {
           onChange={this.handleInputChange}
         />
         {this.state.passwordError ? <div className="errorMsg"> The password field is required </div>  :  null}
-        {/* <Label for="password">Password</Label> */}
+        </Col>
+        <Col xs='6'>
+        <Label for="password">Confirm Password</Label>
         <Input
           type="password"
           placeholder="Confirm Password"
@@ -144,13 +161,16 @@ class Register extends Component {
           value={this.state.confirmpassword}
           onChange={this.handleInputChange}
         />
+        </Col>
+        </Row>
+        
         {this.state.passwordMatchError ? <div className="errorMsg"> The passwords must match. </div>  :  null}
         </FormGroup>
         <FormGroup>
         <Label for="firstName">First Name</Label>
         <Input
           type="firstName"
-          placeholder="firstName"
+          placeholder="First Name"
           name="firstName"
           value={this.state.firstName}
           onChange={this.handleInputChange}
@@ -161,15 +181,17 @@ class Register extends Component {
         <Label for="lastName">Last Name</Label>
         <Input
           type="lastName"
-          placeholder="lastName"
+          placeholder="Last Name"
           name="lastName"
           value={this.state.lastName}
           onChange={this.handleInputChange}
         />
         {this.state.lastnameError ? <div className="errorMsg"> The last name field is required </div>  :  null}
         </FormGroup>
-        <Button onClick={this.handleFormSubmit}>Register</Button>
+        <Button onClick={this.handleFormSubmit}><FA name="wpforms" />{' '}Register</Button>
       </Form>
+      </CardBody>
+      </Card>
       </Container>
       );
 
