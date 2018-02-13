@@ -198,12 +198,8 @@ class Register extends Component {
         />
         {this.state.lastnameError ? <div className="errorMsg"> The last name field is required </div>  :  null}
         </FormGroup>
-<<<<<<< HEAD
         <Button type="submit"><FA name="wpforms"/>{' '}Register</Button>
-=======
         {this.state.userExistsError ? <div className="errorMsg"> Username already in use. Please create a unique username. </div>  :  null}
-        <Button onClick={this.handleFormSubmit}><FA name="wpforms" />{' '}Register</Button>
->>>>>>> 28c4163f86758c1e1f00cbb50ab2b9fa60be7ca0
       </Form>
       </CardBody>
       </Card>
