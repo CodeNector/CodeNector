@@ -30,7 +30,8 @@ class Register extends Component {
         lastnameError: false, 
         passwordError: false,
         passwordMatchError: false,
-        usernameError: false
+        usernameError: false,
+        userExistsError: false
     };
 
     
@@ -59,38 +60,47 @@ class Register extends Component {
         lastnameError: false, 
         passwordError: false,
         passwordMatchError: false,
-        usernameError: false
+        usernameError: false,
+        userExistsError: false
       });
-
-      for(var i=0; i<errors.length; i++){
-        if(errors[i].param === "username"){
-          this.setState({
-            usernameError: true
-          })
-        } 
-
-        if(errors[i].param === "password"){
-          this.setState({
-            passwordError: true
-          })
-        }
-
-        if(errors[i].param === "confirmpassword"){
-          this.setState({
-            passwordMatchError: true
-          })
-        }
-
-        if(errors[i].param ==="firstName"){
-          this.setState({
-            firstnameError: true
-          })
-        }
-
-        if(errors[i].param ==="lastName"){
-          this.setState({
-            lastnameError: true
-          })
+      console.log(errors.userExists); 
+      //this will makee it so the error for unique users display. 
+      if(errors.userExists){
+        console.log("DOES USER EXISTS? " + this.state.userExistsError);
+        this.setState({
+          userExistsError: true
+        })
+      } else {
+        for(var i=0; i<errors.length; i++){
+          if(errors[i].param === "username"){
+            this.setState({
+              usernameError: true
+            })
+          } 
+  
+          if(errors[i].param === "password"){
+            this.setState({
+              passwordError: true
+            })
+          }
+  
+          if(errors[i].param === "confirmpassword"){
+            this.setState({
+              passwordMatchError: true
+            })
+          }
+  
+          if(errors[i].param ==="firstName"){
+            this.setState({
+              firstnameError: true
+            })
+          }
+  
+          if(errors[i].param ==="lastName"){
+            this.setState({
+              lastnameError: true
+            })
+          }
         }
       }
     }
@@ -188,6 +198,7 @@ class Register extends Component {
         />
         {this.state.lastnameError ? <div className="errorMsg"> The last name field is required </div>  :  null}
         </FormGroup>
+        {this.state.userExistsError ? <div className="errorMsg"> Username already in use. Please create a unique username. </div>  :  null}
         <Button onClick={this.handleFormSubmit}><FA name="wpforms" />{' '}Register</Button>
       </Form>
       </CardBody>

@@ -44,13 +44,20 @@ router.post('/register', function(req, res) {
 		});
 
 		// need to look to see if the username exists already here.. use the controller function and see if it returns anything. 
-		
-		User.createUser(newUser, function(err, user){
-			if(err) throw err;
-			console.log(user);
-		});
-		//need to redirect here. 
-		res.json({registrationSuccess: true});
+		User.getUserByUsername(newUser.username, function(err, user){
+			console.log("REG - " + user);
+			if(user){
+				console.log("user exists - cannont use this user");
+				res.json({userExists: "User already exists."})
+			} else {
+				User.createUser(newUser, function(err, user){
+					if(err) throw err;
+					console.log(user);
+				});
+				//need to redirect here.
+				res.json({registrationSuccess: true});
+			}
+		})
 	  }
 });
 
