@@ -9,8 +9,8 @@ const vm = new VM({
 router
 	.route('/')
 	.post((req, res) => {
-		const executedCode = vm.run(req.body.code);
-		console.log(executedCode);
+		// Runs user submitted code in vm on backend
+		const executedCode = vm.run(req.body.code) || 'Not valid JavaScript'; 
 		res.status(200).send(executedCode.toString());
 	});
 
