@@ -10,8 +10,9 @@ import FA from 'react-fontawesome'
 import Sidebar from './Sidebar';
 import 'brace/mode/javascript';
 import 'brace/theme/solarized_dark';
-import safeEval from 'notevil';
 import NewHomePage from "./pages/NewHomePage"
+import API from './utils/API';
+
 
 const socket = io();
 
@@ -45,13 +46,9 @@ class Room extends Component {
 
 	evalCode = () => {
 		// Quick Maffs 
-		try {
-			const result = safeEval(this.state.code);
-			this.updateResultInState(result);
-		} catch (e) {
-			console.log(e instanceof ReferenceError, "Not valid JavaScript");
-		}
-
+		API.execute(this.state.code)
+			.then(result => this.updateResultInState(result))
+			.catch(err => console.log(err));
 	}
 
 	renderResult = () => {
@@ -121,7 +118,7 @@ class Room extends Component {
 						height="85vh"
 						// height="800px"
 						fontSize="18px"
-						defaultValue="//No es6, sorry. 💣"
+						// defaultValue="//No es6, sorry. 💣"
 					/>
 				<Button style={buttonStyle} className="float-right" onClick={this.evalCode}><FA name="play"/>{" "}Run Code</Button>
 					
