@@ -81,7 +81,7 @@ class Room extends Component {
 	}
 
 	updateCodeInState = (newText) => {
-		console.log(newText);
+		// console.log(newText);
 		this.setState({ code: newText });
 		socket.emit('coding event', {
 			room: this.props.challenge.id,
