@@ -49,8 +49,8 @@ export default {
 	execute: function(code) {
 		return axios.post('http://localhost:3001/api/sandbox', {code: code})
 			.then(res => {
-				console.log(res);
-				// return code;
+				console.log(res.data);
+				return res.data;
 			})
 			.catch(err => console.log(err.message));
 	}

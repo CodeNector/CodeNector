@@ -11,7 +11,6 @@ router
 	.post((req, res) => {
 		const executedCode = vm.run(req.body.code);
 		console.log(executedCode);
-		console.log('from sandbox!!!!!!!!!')
 		res.status(200).send(executedCode.toString());
 	});
 

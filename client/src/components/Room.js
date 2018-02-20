@@ -47,14 +47,9 @@ class Room extends Component {
 
 	evalCode = () => {
 		// Quick Maffs 
-		try {
-			const result = safeEval(this.state.code);
-			API.execute(this.state.code);
-			this.updateResultInState(result);
-		} catch (e) {
-			console.log(e instanceof ReferenceError, "Not valid JavaScript");
-		}
-
+		API.execute(this.state.code)
+			.then(result => this.updateResultInState(result))
+			.catch(err => console.log(err));
 	}
 
 	renderResult = () => {
