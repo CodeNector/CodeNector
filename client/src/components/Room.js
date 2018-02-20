@@ -12,6 +12,8 @@ import 'brace/mode/javascript';
 import 'brace/theme/solarized_dark';
 import safeEval from 'notevil';
 import NewHomePage from "./pages/NewHomePage"
+import API from './utils/API';
+
 
 const socket = io();
 
@@ -47,6 +49,7 @@ class Room extends Component {
 		// Quick Maffs 
 		try {
 			const result = safeEval(this.state.code);
+			API.execute(this.state.code);
 			this.updateResultInState(result);
 		} catch (e) {
 			console.log(e instanceof ReferenceError, "Not valid JavaScript");

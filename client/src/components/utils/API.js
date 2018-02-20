@@ -45,5 +45,13 @@ export default {
 				console.log(error);
 				console.log('error at logout');
 			});
+	},
+	execute: function(code) {
+		return axios.post('http://localhost:3001/api/sandbox', {code: code})
+			.then(res => {
+				console.log(res);
+				// return code;
+			})
+			.catch(err => console.log(err.message));
 	}
 };
