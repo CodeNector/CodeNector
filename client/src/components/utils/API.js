@@ -47,7 +47,8 @@ export default {
 			});
 	},
 	execute: function(code) {
-		return axios.post('http://localhost:3001/api/sandbox', {code: code})
+		//In testing set url to localhost
+		return axios.post('/api/sandbox', {code: code})
 			.then(res => {
 				console.log(res.data);
 				return res.data;
