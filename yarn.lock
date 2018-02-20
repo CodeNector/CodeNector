@@ -6599,10 +6599,6 @@ safe-regex@^1.1.0:
   dependencies:
     ret "~0.1.10"
 
-sandbox@^0.8.6:
-  version "0.8.6"
-  resolved "https://registry.yarnpkg.com/sandbox/-/sandbox-0.8.6.tgz#d169f18513604e327c9bf1cc39881b0bec4ed7b6"
-
 sane@~1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/sane/-/sane-1.6.0.tgz#9610c452307a135d29c1fdfe2547034180c46775"

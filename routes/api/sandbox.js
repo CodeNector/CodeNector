@@ -1,5 +1,4 @@
 const router = require('express').Router();
-// const sandbox = require('../../lib/sandbox');
 const {VM} = require('vm2');
 const vm = new VM({
 	timeout: 1000,
