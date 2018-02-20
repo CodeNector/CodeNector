@@ -9,8 +9,10 @@ const vm = new VM({
 router
 	.route('/')
 	.post((req, res) => {
-		const executedCode = vm.run(req.query.code);
+		const executedCode = vm.run(req.body.code);
+		console.log(req.body.code);
 		console.log(executedCode);
+		// console.log(req.body);
 		res.status(200).send(executedCode.toString());
 	});
 

@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // Body parser 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Passport middle ware --
 app.use(cookieParser());
