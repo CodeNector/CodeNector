@@ -49,10 +49,15 @@ export default {
 	execute: function(code) {
 		//In testing set url to localhost
 		return axios.post('/api/sandbox', {code: code})
+		// return axios.post('http://localhost:3001/api/sandbox', {code: code})
+		
 			.then(res => {
 				console.log(res.data);
 				return res.data;
 			})
-			.catch(err => console.log(err.message));
+			.catch((err) => {
+				console.log(err.message);
+				// res.status(500).send('something went wrong!');
+			});
 	}
 };

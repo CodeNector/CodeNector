@@ -9,8 +9,15 @@ router
 	.route('/')
 	.post((req, res) => {
 		// Runs user submitted code in vm on backend
-		const executedCode = vm.run(req.body.code) || 'Not valid JavaScript'; 
-		res.status(200).send(executedCode.toString());
+		try {
+			const executedCode = vm.run(req.body.code); 
+			res.status(200).send(executedCode.toString());
+			
+		} catch (e) {
+			if (e instanceof ReferenceError){
+				res.status(200).send('Not valid JavaScript');
+			} 
+		}
 	});
 
 
