@@ -9,6 +9,7 @@ router.get('/user', (req, res) => {
 	else return res.json({ user: null });
 });
 
+
 router.post(
 	'/login',
 	function(req, res, next) {
