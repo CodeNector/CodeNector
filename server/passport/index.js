@@ -1,6 +1,6 @@
 const passport = require('passport');
-const LocalStrategy = require('localStrategy');
-const User = require('../../models/users');
+const LocalStrategy = require('./localStrategy');
+const User = require('../../models/user');
 
 passport.serializeUser((user,done) => {
 	console.log(user, 'seralized'); //raw user object
@@ -8,7 +8,7 @@ passport.serializeUser((user,done) => {
 });
 
 passport.deserializeUser((id, done) => {
-	console.log('deserilize');
+	console.log('deserialize');
 	User.findOne(
 		{ _id: id },
 		'firstName lastName photos local.username',
@@ -21,4 +21,4 @@ passport.deserializeUser((id, done) => {
 
 passport.use(LocalStrategy);
 
-module.export = passport;
+module.exports = passport;

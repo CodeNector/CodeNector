@@ -13,12 +13,12 @@ router.get('/user', (req, res) => {
 router.post(
 	'/login',
 	function(req, res, next) {
-		console.log(req.body);
+		console.log(req.body, 'req.body');
 		next();
 	},
 	passport.authenticate('local'),
 	(req, res) => {
-		console.log('Post to /login')
+		console.log('Post to /login');
 		const user = JSON.parse(JSON.stringify(req.use));
 		const cleanUser = Object.assign({}, user);
 		if (cleanUser.local) {
@@ -42,11 +42,12 @@ router.post('/signup', (req, res) => {
 			'local.password': password
 		});
 		newUser.save((err, savedUser) => {
-			if (err) return res.json(err);
-			return res.json(saveduser);
-		})
+			if (err) 
+				return res.json(err);
+			return res.json(savedUser);
+		});
 
 		
-	})
-})
+	});
+});
 module.exports = router;

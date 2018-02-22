@@ -3,7 +3,8 @@ import HomePage from '../pages/HomePage';
 import API from "../utils/API"
 import { Button, Form, FormGroup, Label, Input, FormText, Container, Card, CardBody, Col, Row } from 'reactstrap';
 import "./registrationPage.css";
-import FA from 'react-fontawesome'
+import FA from 'react-fontawesome';
+import { Redirect } from 'react-router-dom';
 
 const buttonStyle = {
   marginTop: '5px',
@@ -22,118 +23,45 @@ class Register extends Component {
         username: "",
         password: "",
         confirmPassword: "",
-        firstName: "",
-        lastName: "",
-        isRegistered: false,
-        errors: [],
-        firstnameError: false,
-        lastnameError: false, 
-        passwordError: false,
-        passwordMatchError: false,
-        usernameError: false,
-        userExistsError: false
+        redirectTo: null
     };
 
     
     // handle any changes to the input fields
-    handleInputChange = event => {
-        // Pull the name and value properties off of the event.target (the element which triggered the event)
-        const { name, value } = event.target;
-
+    handleInputChange = e => {
         // Set the state for the appropriate input field
         this.setState({
-        [name]: value
+        [e.target.name]: e.target.value
         });
     };
 
-    completeRegistration = () => {
-      this.setState({
-        isRegistered: true
-      })
-      // add post to also login the user as well. 
-    }
-
-    loopThroughTheErrors = (errors) => {
-      this.setState({
-        errors: errors,
-        firstnameError: false,
-        lastnameError: false, 
-        passwordError: false,
-        passwordMatchError: false,
-        usernameError: false,
-        userExistsError: false
-      });
-      console.log(errors.userExists); 
-      //this will makee it so the error for unique users display. 
-      if(errors.userExists){
-        console.log("DOES USER EXISTS? " + this.state.userExistsError);
-        this.setState({
-          userExistsError: true
-        })
-      } else {
-        for(var i=0; i<errors.length; i++){
-          if(errors[i].param === "username"){
-            this.setState({
-              usernameError: true
-            })
-          } 
-  
-          if(errors[i].param === "password"){
-            this.setState({
-              passwordError: true
-            })
-          }
-  
-          if(errors[i].param === "confirmpassword"){
-            this.setState({
-              passwordMatchError: true
-            })
-          }
-  
-          if(errors[i].param ==="firstName"){
-            this.setState({
-              firstnameError: true
-            })
-          }
-  
-          if(errors[i].param ==="lastName"){
-            this.setState({
-              lastnameError: true
-            })
-          }
-        }
-      }
-    }
-
-
     // here we need to send the username and password to the server.. so that passport can ddo stuff with that. 
-    handleFormSubmit = event => {
-        event.preventDefault();
+    handleFormSubmit = e => {
+        e.preventDefault();
         //make post rquest here to /login
         API.submitRegister({
           //put value from fields here. 
           username: this.state.username,
           password: this.state.password,
-          confirmpassword: this.state.confirmpassword,
-          firstName: this.state.firstName,
-          lastName: this.state.lastName
         })
-        .then(res => {
-          console.log("response.data: " + res); 
-          if(res.registrationSuccess){
-            // do stuff to after registration. 
-            this.completeRegistration();
+        .then(response => {
+          console.log("response" + response); 
+          if (!response.data) {
+            console.log('registered');
+            this.setState({
+              redirectTo: '/login'
+            })
           } else {
-            // for each index of the array returned we need to display it so the user can see the error. 
-            this.loopThroughTheErrors(res);
+            console.log(`You've already registered`)
           }
         })
         .catch(err => console.log(err));
     }; 
 
   render() {
-    const homePage = (<HomePage />);
-    const registrationForm = (
+    if(this.state.redirectTo) {
+      return <Redirect to={{ pathname: this.state.redirectTo }} />
+    } return (
       <Container>
         <Card style={cardStyle}>
           <CardBody>
@@ -147,7 +75,6 @@ class Register extends Component {
           value={this.state.username}
           onChange={this.handleInputChange}
         />
-        {this.state.usernameError ? <div className="errorMsg"> The username field is required </div>  :  null}
         </FormGroup>
         <FormGroup>
         <Row>
@@ -160,23 +87,21 @@ class Register extends Component {
           value={this.state.password}
           onChange={this.handleInputChange}
         />
-        {this.state.passwordError ? <div className="errorMsg"> The password field is required </div>  :  null}
         </Col>
         <Col xs='6'>
         <Label for="password">Confirm Password</Label>
         <Input
           type="password"
           placeholder="Confirm Password"
-          name="confirmpassword"
-          value={this.state.confirmpassword}
+          name="confirmPassword"
+          value={this.state.confirmPassword}
           onChange={this.handleInputChange}
         />
         </Col>
         </Row>
         
-        {this.state.passwordMatchError ? <div className="errorMsg"> The passwords must match. </div>  :  null}
         </FormGroup>
-        <FormGroup>
+        {/* <FormGroup>
         <Label for="firstName">First Name</Label>
         <Input
           type="firstName"
@@ -185,7 +110,6 @@ class Register extends Component {
           value={this.state.firstName}
           onChange={this.handleInputChange}
         />
-        {this.state.firstnameError ? <div className="errorMsg"> The first name field is required </div>  :  null}
         </FormGroup>
         <FormGroup>
         <Label for="lastName">Last Name</Label>
@@ -196,17 +120,13 @@ class Register extends Component {
           value={this.state.lastName}
           onChange={this.handleInputChange}
         />
-        {this.state.lastnameError ? <div className="errorMsg"> The last name field is required </div>  :  null}
-        </FormGroup>
+        </FormGroup> */}
         <Button type="submit"><FA name="wpforms"/>{' '}Register</Button>
-        {this.state.userExistsError ? <div className="errorMsg"> Username already in use. Please create a unique username. </div>  :  null}
       </Form>
       </CardBody>
       </Card>
       </Container>
-      );
-
-    return this.state.isRegistered ? homePage : registrationForm 
+    );
   }
 
 }

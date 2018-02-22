@@ -9,12 +9,12 @@ import Room from './components/Room';
 import Nav from './components/Nav';
 import 'bootstrap/dist/css/bootstrap.css';
 
-import Login from './components/login/login'
-import Logout from './components/logout/logout'
-import Register from './components/registration/registrationPage'
+import Login from './components/login/login';
+import Logout from './components/logout/logout';
+import Register from './components/registration/registrationPage';
 import userProfile from './components/pages/userProfile';
-import NewHomePage from "./components/pages/NewHomePage"
-import './index.css'
+import NewHomePage from './components/pages/NewHomePage';
+import './index.css';
 
 const store = configureStore();
 
@@ -25,12 +25,12 @@ render(
 			<div>
 				<Nav/>
 				<Switch>
-					<Route exact path="/" component={NewHomePage} />
-					<Route exact path="/rooms/:id" component={Room} />
-					<Route exact path="/register" component={Register} />
-					<Route exact path="/login" component={Login} />
-					<Route exact path="/userprofile" component={userProfile}/>
-					<Route exact path="/Home" component={HomePage}/>
+					<Route exact path='/' component={NewHomePage} />
+					<Route exact path='/rooms/:id' component={Room} />
+					<Route exact path='/register' component={Register} />
+					<Route exact path='/login' component={Login} />
+					<Route exact path='/userprofile' component={userProfile}/>
+					<Route exact path='/Home' component={HomePage}/>
 				</Switch>
 			</div>
 		</Router>

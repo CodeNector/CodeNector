@@ -9,12 +9,12 @@ export default {
 		return axios.get('/login');
 	},
 
-	submitRegister: function(userInfo) {
+	submitRegister: function(username, password) {
 		// this will respond with error if there was an error
 		// or respond with registered if registered.
-		return axios.post('/register', userInfo)
+		return axios.post('/auth/signup', username, password)
 			.then(function (response) {
-				console.log(response.data);
+				console.log(response.data, 'response.data');
 				return response.data;
 			})
 			.catch(function (error) {
@@ -22,10 +22,11 @@ export default {
 			});
 	},
 
-	submitLogin: function(LoginInfo) {
-		return axios.post('/login', LoginInfo)
+	submitLogin: function(username, password) {
+		console.log(username, password)
+		return axios.post('/auth/login', username, password)
 			.then(function (response) {
-				console.log(response);
+				console.log(response, 'response');
 				console.log('hitting login');
 				return response.data;
 			})
