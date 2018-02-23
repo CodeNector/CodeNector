@@ -47,7 +47,7 @@ class Register extends Component {
           password: this.state.password,
         })
         .then(res => {
-          console.log(res.data.error);
+          console.log(res);
           if(!res.data.error){
             console.log(`you're good`);
             this.setState({ redirectTo: '/login'})

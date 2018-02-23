@@ -19,7 +19,7 @@ router.post(
 	passport.authenticate('local'),
 	(req, res) => {
 		console.log('Post to /login');
-		const user = JSON.parse(JSON.stringify(req.use));
+		const user = JSON.parse(JSON.stringify(req.user));
 		const cleanUser = Object.assign({}, user);
 		if (cleanUser.local) {
 			console.log(`Deleting ${cleanUser.local.passport}`);
@@ -44,7 +44,7 @@ router.post('/signup', (req, res) => {
 		newUser.save((err, savedUser) => {
 			if (err) 
 				return res.json(err);
-			return savedUser;
+			return res.json(savedUser);
 		});
 
 		
