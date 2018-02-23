@@ -5,6 +5,8 @@ import { Button, Form, FormGroup, Label, Input, FormText, Container, Card, CardB
 import "./registrationPage.css";
 import FA from 'react-fontawesome';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
+
 
 const buttonStyle = {
   marginTop: '5px',
@@ -39,21 +41,20 @@ class Register extends Component {
     handleFormSubmit = e => {
         e.preventDefault();
         //make post rquest here to /login
-        API.submitRegister({
+        axios.post('/auth/signup',{
           //put value from fields here. 
           username: this.state.username,
           password: this.state.password,
         })
-        .then(response => {
-          console.log("response" + response); 
-          if (!response.data) {
-            console.log('registered');
-            this.setState({
-              redirectTo: '/login'
-            })
+        .then(res => {
+          console.log(res.data.error);
+          if(!res.data.error){
+            console.log(`you're good`);
+            this.setState({ redirectTo: '/login'})
           } else {
-            console.log(`You've already registered`)
+            console.log('duplicate');
           }
+          
         })
         .catch(err => console.log(err));
     }; 
