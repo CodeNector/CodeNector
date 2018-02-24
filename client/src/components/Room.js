@@ -118,7 +118,7 @@ class Room extends Component {
 						height="85vh"
 						// height="800px"
 						fontSize="18px"
-						// defaultValue="//No es6, sorry. 💣"
+						defaultValue="//No es6 syntax highlighting, sorry. 💣"
 					/>
 				<Button style={buttonStyle} className="float-right" onClick={this.evalCode}><FA name="play"/>{" "}Run Code</Button>
 					

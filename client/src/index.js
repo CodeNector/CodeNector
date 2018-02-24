@@ -30,7 +30,7 @@ render(
 					<Route exact path='/register' component={Register} />
 					<Route exact path='/login' component={Login} />
 					<Route exact path='/userprofile' component={userProfile}/>
-					<Route exact path='/Home' component={HomePage}/>
+					<Route exact path='/home' component={HomePage}/>
 				</Switch>
 			</div>
 		</Router>

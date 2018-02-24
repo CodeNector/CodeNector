@@ -40,7 +40,7 @@ class Login extends Component {
 		console.log('handleSubmit');
 		this.login(this.state.username, this.state.password);
 		this.setState({
-			redirectTo: '/'
+			redirectTo: '/home'
 		})
 	}
 	

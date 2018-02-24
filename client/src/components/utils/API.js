@@ -16,8 +16,8 @@ export default {
 	},
 
 	submitLogin(username, password) {
-		console.log(username, password)
-		return axios.post('/auth/login', username, password)
+		console.log(username, password);
+		return axios.post('/auth/login', { username, password })
 			.then(function (response) {
 				console.log(response, 'response');
 				console.log('hitting login');
