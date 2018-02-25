@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import API from '../utils/API';
 import { Button, Form, FormGroup, Label, Input, 
 				 FormText, Container, Card, CardBody} from 'reactstrap';
+import { loginUser } from "../../actions/userActions";
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Nav from '../Nav/Nav';
@@ -101,19 +103,19 @@ class Login extends Component {
 	}
 }
 
-// const mapStateToProps = (state, ownProps) => {
-// 	return {email: state.currentemail.email};
+const mapStateToProps = (state, ownProps) => {
+	return {user: state.currentUser.user};
 	
-// };
+};
 
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		onSuccessfullLogin: (email) => {
-// 			dispatch(loginemail(email))
-// 		}
-// 	} 
-// };
+const mapDispatchToProps = dispatch => {
+	return {
+		onSuccessfullLogin: (user) => {
+			dispatch(loginUser(user))
+		}
+	} 
+};
 
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Login);
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
+// export default Login;
