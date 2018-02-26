@@ -21,7 +21,7 @@ export default {
 			.then(function (response) {
 				console.log(response, 'response');
 				console.log('hitting login');
-				return true;
+				return response;
 			})
 			.catch(function (error) {
 				console.log(error);

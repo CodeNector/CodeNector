@@ -32,9 +32,15 @@ class Login extends Component {
 	}
 
 	handleInputChange = e => {
+		// this.setState({
+		// 	[e.target.name]: e.target.value
+		// });
+
+		const { name, value } = e.target;
+
 		this.setState({
-			[e.target.name]: e.target.value
-		});
+			[name]: value
+		})
 	}
 
 	handleFormSubmit = e => {
@@ -50,11 +56,14 @@ class Login extends Component {
 		API.submitLogin(username, password)
 			.then(res => {
 				console.log(res, 'line 50');
-				if(res.status === 200) {
+				if(res.data) {
+					console.log('within if')
 					this.setState({
 						loggedIn: true,
 						user: res.data.user
 					})
+					console.log(res.data.user)
+				this.props.onSuccessfullLogin(res.data.user);
 				}
 			})
 	}
@@ -90,7 +99,7 @@ class Login extends Component {
 											value={this.state.password}
 											onChange={this.handleInputChange}
 										/>
-										<Button style={buttonStyle} href="/Home" onClick={this.handleFormSubmit}><FA name='sign-in-alt'/>{" "}Login</Button>
+										<Button style={buttonStyle} onClick={this.handleFormSubmit}><FA name='sign-in-alt'/>{" "}Login</Button>
 									</FormGroup>
 								</Form>
 							</Container>
