@@ -28,7 +28,8 @@ class Login extends Component {
 	state = {
 		username: '',
 		password:'',
-		redirectTo: null
+		redirectTo: null,
+		loggedIn: false
 	}
 
 	handleInputChange = e => {
@@ -48,7 +49,7 @@ class Login extends Component {
 		console.log('handleSubmit');
 		this.login(this.state.username, this.state.password);
 		this.setState({
-			redirectTo: '/home'
+			redirectTo: '/'
 		})
 	}
 	
@@ -56,15 +57,19 @@ class Login extends Component {
 		API.submitLogin(username, password)
 			.then(res => {
 				console.log(res, 'line 50');
-				if(res.data) {
-					console.log('within if')
+				if(!res) {
+					console.log('problem logging in');
+
+				// this.props.onSuccessfullLogin(res.data.user);
+				} else {
 					this.setState({
 						loggedIn: true,
 						user: res.data.user
 					})
 					console.log(res.data.user)
-				this.props.onSuccessfullLogin(res.data.user);
+					
 				}
+
 			})
 	}
 
