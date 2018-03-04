@@ -51,5 +51,12 @@ export default {
 				console.log(err.message);
 				// res.status(500).send('something went wrong!');
 			});
+	},
+	getUser() {
+		return axios.get('/auth/user')
+			.then(res => {
+				return res;
+			})
+			.catch(err => {if (err) throw err; });
 	}
 };

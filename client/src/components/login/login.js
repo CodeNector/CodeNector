@@ -32,6 +32,11 @@ class Login extends Component {
 		loggedIn: false
 	}
 
+	componentDidMount() {
+		API.getUser()
+			.then(res => console.log(res, 'line 37'))
+	}
+
 	handleInputChange = e => {
 		// this.setState({
 		// 	[e.target.name]: e.target.value
@@ -48,9 +53,9 @@ class Login extends Component {
 		e.preventDefault();
 		console.log('handleSubmit');
 		this.login(this.state.username, this.state.password);
-		this.setState({
-			redirectTo: '/'
-		})
+		// this.setState({
+		// 	redirectTo: '/'
+		// })
 	}
 	
 	login(username, password) {
@@ -64,7 +69,8 @@ class Login extends Component {
 				} else {
 					this.setState({
 						loggedIn: true,
-						user: res.data.user
+						user: res.data.user,
+						redirectTo: '/'
 					})
 					console.log(res.data.user)
 					
